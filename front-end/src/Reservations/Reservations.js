@@ -1,9 +1,8 @@
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
-import Dashboard from "../../dashboard/Dashboard";
+import Dashboard from "../dashboard/Dashboard";
 import CreateReservations from "./CreateReservation";
-import useQuery from "../../utils/useQuery";
-import { today } from "../../utils/date-time";
+import useQuery from "../utils/useQuery";
 
 /**
  * Defines all the routes for the application.

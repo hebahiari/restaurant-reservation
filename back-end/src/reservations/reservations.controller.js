@@ -25,9 +25,10 @@ function hasEnoughPeople(req, res, next) {
 }
 
 function hasFutureWorkingDate(req, res, next) {
+    console.log("request", req.body.data)
     const reservationDate = new Date(req.body.data.reservation_date);
     const today = new Date();
-
+    // console.log({ reservationDate, today })
     let reservationTime = req.body.data.reservation_time;
     let hours = parseInt(reservationTime.slice(0, 2));
     let minutes = parseInt(reservationTime.slice(2, 2));
@@ -40,7 +41,7 @@ function hasFutureWorkingDate(req, res, next) {
             status: 400,
         });
     }
-    console.log({ currentTimeHours, hours });
+
     if (reservationDate.getUTCDate() < today.getUTCDate()) {
         next({
             message: "Date needs to be in the future",

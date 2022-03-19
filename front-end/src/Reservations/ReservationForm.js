@@ -1,6 +1,9 @@
 import React from "react";
+import { today } from "../utils/date-time";
 
 function ReservationForm({handleChange, handleSubmit, newReservation, history}){
+
+  let todaysDate = today()
 
 return(
 <form onSubmit={handleSubmit}>
@@ -8,13 +11,14 @@ return(
           <label htmlFor="first_name" className="form-label">
             First Name
           </label>
-          <textarea
+          <input
             className="form-control"
             id="first_name"
             name="first_name"
             required
             onChange={handleChange}
             value={newReservation.first_name}
+            placeholder="Insert first name here"
           />
         </div>
 
@@ -22,13 +26,14 @@ return(
           <label htmlFor="last_name" className="form-label">
             Last Name
           </label>
-          <textarea
+          <input
             className="form-control"
             id="last_name"
             name="last_name"
             required
             onChange={handleChange}
             value={newReservation.last_name}
+            placeholder="Insert last name here"
           />
         </div>
 
@@ -36,13 +41,16 @@ return(
           <label htmlFor="mobile_number" className="form-label">
             Mobile number
           </label>
-          <textarea
+          <input
+           type="tel" 
+           pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
             className="form-control"
             id="mobile_number"
             name="mobile_number"
             required
             onChange={handleChange}
             value={newReservation.mobile_number}
+            placeholder="ex: 000-000-0000"
           />
         </div>
 
@@ -50,13 +58,16 @@ return(
           <label htmlFor="reservation_date" className="form-label">
           Reservation date
           </label>
-          <textarea
+          <input
             className="form-control"
+            type="date"
             id="reservation_date"
             name="reservation_date"
+            min={todaysDate}
             required
             onChange={handleChange}
             value={newReservation.reservation_date}
+            placeholder={today}
           />
         </div>
 
@@ -64,13 +75,17 @@ return(
           <label htmlFor="reservation_time" className="form-label">
             Reservation time
           </label>
-          <textarea
+          <input
+          type="time"
+          min="10:30" 
+          max="20:30"
             className="form-control"
             id="reservation_time"
             name="reservation_time"
             required
             onChange={handleChange}
             value={newReservation.reservation_time}
+            placeholder="12:00"
           />
         </div>
 
@@ -78,7 +93,9 @@ return(
           <label htmlFor="people" className="form-label">
             Number of people
           </label>
-          <textarea
+          <input
+          type= "number"
+          min="1"
             className="form-control"
             id="people"
             name="people"

@@ -1,8 +1,8 @@
-import { createReservation } from "../../utils/api";
+import { createReservation } from "../utils/api";
 import { Link, useHistory } from "react-router-dom";
 import React, { useState } from "react";
 import ReservationForm from "./ReservationForm";
-import ErrorAlert from "../ErrorAlert";
+import ErrorAlert from "../layout/ErrorAlert";
 
 
 function CreateReservation() {

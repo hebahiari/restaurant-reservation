@@ -4,7 +4,7 @@ import { listReservations } from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert";
 import { previous, next, today } from "../utils/date-time";
 import useQuery from "../utils/useQuery"
-
+import ListReservations from "../Reservations/ListReservations"
 /**
  * Defines the dashboard page.
  * @param date
@@ -45,14 +45,15 @@ function Dashboard({ date }) {
         <h4 className="mb-0">Reservations for date</h4>
       </div>
       <ErrorAlert error={reservationsError} />
-      {JSON.stringify(reservations)}
+      <ListReservations reservations={reservations}/>
+      {/* {JSON.stringify(reservations)} */}
       <div>
         <button
           className="btn btn-secondary m-1"
-          onClick={() => history.push(`/reservations?date=${nextDay}`)}
+          onClick={() => history.push(`/reservations?date=${PreviousDay}`)}
         >
-          Next Day
-        </button>
+          Previous Day
+        </button> 
         <button
           className="btn btn-secondary m-1"
           onClick={() => history.push(`/reservations?date=${todaysDate}`)}
@@ -61,9 +62,9 @@ function Dashboard({ date }) {
         </button>
         <button
           className="btn btn-secondary m-1"
-          onClick={() => history.push(`/reservations?date=${PreviousDay}`)}
+          onClick={() => history.push(`/reservations?date=${nextDay}`)}
         >
-          Previous Day
+          Next Day
         </button>
       </div>
     </main>
