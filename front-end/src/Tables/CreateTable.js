@@ -1,5 +1,5 @@
 import { createTable } from "../utils/api";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import React, { useState } from "react";
 import TableForm from "./TableForm";
 import ErrorAlert from "../layout/ErrorAlert";

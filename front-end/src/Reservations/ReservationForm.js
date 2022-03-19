@@ -43,7 +43,7 @@ return(
           </label>
           <input
            type="tel" 
-           pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+          //  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
             className="form-control"
             id="mobile_number"
             name="mobile_number"
@@ -63,7 +63,7 @@ return(
             type="date"
             id="reservation_date"
             name="reservation_date"
-            min={todaysDate}
+            // min={todaysDate}
             required
             onChange={handleChange}
             value={newReservation.reservation_date}
@@ -80,7 +80,6 @@ return(
           type="time"
           min="10:30" 
           max="21:30"
-          step="2"
             className="form-control"
             id="reservation_time"
             name="reservation_time"
@@ -110,7 +109,7 @@ return(
 
 
 
-      <button className="btn btn-secondary m-1" onClick={() => history.go("/")}>
+      <button className="btn btn-secondary m-1" onClick={() => history.go(-1)}>
           Cancel
         </button>
         <button type="submit" className="btn btn-primary m-1">

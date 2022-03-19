@@ -13,7 +13,8 @@ const hasRequiredProperties = hasProperties(
 
 function hasEnoughPeople(req, res, next) {
     let { people } = req.body.data;
-    if (typeof(people) !== "number" || people < 1) {
+    console.log(typeof(people))
+    if (typeof(parseInt(people)) !== "number" || people < 1) {
         next({
             message: "people has to be a number above zero",
             status: 400,
@@ -25,7 +26,7 @@ function hasEnoughPeople(req, res, next) {
 function hasFutureWorkingDate(req, res, next) {
     const { reservation_date, reservation_time } = req.body.data;
     const reservationDate = new Date(
-        `${reservation_date}T${reservation_time}Z`
+        `${reservation_date}T${reservation_time}:00Z`
     );
     const today = new Date();
 
@@ -66,7 +67,6 @@ async function hasEligibleTime(req, res, next) {
 async function list(req, res) {
     const { date } = req.query;
     const allReservations = await service.list(date);
-    console.log({ allReservations })
     res.status(200).json({ data: allReservations });
 }
 
