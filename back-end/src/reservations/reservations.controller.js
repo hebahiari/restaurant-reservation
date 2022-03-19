@@ -1,7 +1,6 @@
 const service = require("./reservations.service");
 const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 const hasProperties = require("../errors/hasProperties");
-// const { today } = require("../utils/date-time");
 
 const hasRequiredProperties = hasProperties(
     "first_name",
@@ -13,27 +12,22 @@ const hasRequiredProperties = hasProperties(
 );
 
 function hasEnoughPeople(req, res, next) {
-    let data = req.body.data;
-    if (req.body.data.people >= 1) {
-        next();
-    } else {
+    let { people } = req.body.data;
+    if (typeof(people) !== "number" || people < 1) {
         next({
             message: "people has to be a number above zero",
             status: 400,
         });
     }
+    next();
 }
 
 function hasFutureWorkingDate(req, res, next) {
-    console.log("request", req.body.data)
-    const reservationDate = new Date(req.body.data.reservation_date);
+    const { reservation_date, reservation_time } = req.body.data;
+    const reservationDate = new Date(
+        `${reservation_date}T${reservation_time}Z`
+    );
     const today = new Date();
-    // console.log({ reservationDate, today })
-    let reservationTime = req.body.data.reservation_time;
-    let hours = parseInt(reservationTime.slice(0, 2));
-    let minutes = parseInt(reservationTime.slice(2, 2));
-    let currentTimeHours = today.getHours();
-    let currentTimeMinutes = today.getMinutes();
 
     if (reservationDate.getUTCDay() == 2) {
         next({
@@ -42,24 +36,12 @@ function hasFutureWorkingDate(req, res, next) {
         });
     }
 
-    if (reservationDate.getUTCDate() < today.getUTCDate()) {
+    if (reservationDate < today) {
         next({
-            message: "Date needs to be in the future",
+            message: "Reservation needs to be in the future",
             status: 400,
         });
     }
-    if (reservationDate.getUTCDate() == today.getUTCDate()) {
-        if (
-            currentTimeHours > hours ||
-            (currentTimeHours == hours && currentTimeMinutes > minutes)
-        ) {
-            next({
-                message: "Time needs to be in the future",
-                status: 400,
-            });
-        }
-    }
-
     next();
 }
 

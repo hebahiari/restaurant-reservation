@@ -67,7 +67,8 @@ return(
             required
             onChange={handleChange}
             value={newReservation.reservation_date}
-            placeholder={today}
+            placeholder="YYYY-MM-DD" 
+            pattern="\d{4}-\d{2}-\d{2}"
           />
         </div>
 
@@ -78,14 +79,16 @@ return(
           <input
           type="time"
           min="10:30" 
-          max="20:30"
+          max="21:30"
+          step="2"
             className="form-control"
             id="reservation_time"
             name="reservation_time"
             required
             onChange={handleChange}
             value={newReservation.reservation_time}
-            placeholder="12:00"
+            placeholder="HH:MM" 
+            pattern="[0-9]{2}:[0-9]{2}"
           />
         </div>
 
