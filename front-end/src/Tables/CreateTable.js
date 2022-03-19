@@ -21,7 +21,7 @@ function CreateTable() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    createNewTable(newTable)
+    createNewTable(newTable).then(() => history.push("/dashboard"))
   };
 
   

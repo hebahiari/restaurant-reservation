@@ -1,5 +1,7 @@
 exports.seed = function(knex) {
-    return knex("tables").insert([{
+    console.log("------- Running tables seed -------");
+
+    return knex("tables").del().insert([{
             "table_name": "Bar #1",
             "capacity": 1,
         },

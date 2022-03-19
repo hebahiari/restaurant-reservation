@@ -66,13 +66,14 @@ async function hasEligibleTime(req, res, next) {
 async function list(req, res) {
     const { date } = req.query;
     const allReservations = await service.list(date);
+    console.log({ allReservations })
     res.status(200).json({ data: allReservations });
 }
 
 async function create(req, res) {
     console.log(">> req.body.data", req.body.data);
-    const created = await service.create(req.body.data);
-    res.status(201).json({ created });
+    const data = await service.create(req.body.data);
+    res.status(201).json({ data });
 }
 
 module.exports = {
