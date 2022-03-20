@@ -78,8 +78,8 @@ return(
           </label>
           <input
           type="time"
-          min="10:30" 
-          max="21:30"
+          // min="10:30" 
+          // max="21:30"
             className="form-control"
             id="reservation_time"
             name="reservation_time"

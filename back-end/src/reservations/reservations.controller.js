@@ -27,7 +27,8 @@ function hasFutureWorkingDate(req, res, next) {
     const { reservation_date, reservation_time } = req.body.data;
     const reservationDate = new Date(
         `${reservation_date}T${reservation_time}:00Z`
-    );
+    )
+    res.locals.time = reservationDate
     const today = new Date();
 
     if (reservationDate.getUTCDay() == 2) {
@@ -47,9 +48,11 @@ function hasFutureWorkingDate(req, res, next) {
 }
 
 async function hasEligibleTime(req, res, next) {
-    let time = req.body.data.reservation_time;
-    let hours = parseInt(time.slice(0, 2));
-    let minutes = parseInt(time.slice(2, 2));
+    let time = res.locals.time
+
+    let hours = res.locals.time.getUTCHours();
+    let minutes = res.locals.time.getUTCMinutes();
+    console.log({ hours, minutes })
     if (
         hours < 10 ||
         (hours == 10 && minutes < 30) ||
