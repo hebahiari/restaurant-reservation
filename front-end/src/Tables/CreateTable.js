@@ -4,11 +4,10 @@ import React, { useState } from "react";
 import TableForm from "./TableForm";
 import ErrorAlert from "../layout/ErrorAlert";
 
-
 function CreateTable() {
   const emptyTable = {
     table_name: "",
-    Capacity: 0,
+    capacity: 0,
   };
 
   const [newTable, setNewTable] = useState(emptyTable);
@@ -21,14 +20,14 @@ function CreateTable() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    createNewTable(newTable).then(() => history.push("/dashboard"))
+    createNewTable(newTable)
   };
 
-  
   function createNewTable(newTable) {
     const abortController = new AbortController();
     setNewTableError(null);
     createTable(newTable, abortController.signal)
+      .then(() => history.push(`/`))
       .then(() => setNewTable(emptyTable))
       .catch(setNewTableError);
     return () => abortController.abort();
@@ -43,7 +42,7 @@ function CreateTable() {
         newTable={newTable}
         history={history}
       />
-       <ErrorAlert error={newTableError} />
+      <ErrorAlert error={newTableError} />
     </div>
   );
 }

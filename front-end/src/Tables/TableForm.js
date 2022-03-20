@@ -8,7 +8,7 @@ return(
           <label htmlFor="table_name" className="form-label">
             Table Name
           </label>
-          <textarea
+          <input
             className="form-control"
             id="table_name"
             name="table_name"
@@ -22,7 +22,7 @@ return(
           <label htmlFor="capacity" className="form-label">
             Capacity
           </label>
-          <textarea
+          <input
             className="form-control"
             id="capacity"
             name="capacity"
@@ -31,12 +31,11 @@ return(
             value={newTable.capacity}
           />
         </div>
-
-      <button className="btn btn-secondary m-1" onClick={() => history.go("/")}>
-          Cancel
-        </button>
         <button type="submit" className="btn btn-primary m-1">
           Submit
+        </button>
+      <button className="btn btn-secondary m-1" onClick={() => history.go("/")}>
+          Cancel
         </button>
       </form>
 )

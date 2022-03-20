@@ -13,7 +13,6 @@ const hasRequiredProperties = hasProperties(
 
 function hasEnoughPeople(req, res, next) {
     let { people } = req.body.data;
-    console.log(typeof(people))
     if (typeof(parseInt(people)) !== "number" || people < 1) {
         next({
             message: "people has to be a number above zero",
@@ -52,7 +51,6 @@ async function hasEligibleTime(req, res, next) {
 
     let hours = res.locals.time.getUTCHours();
     let minutes = res.locals.time.getUTCMinutes();
-    console.log({ hours, minutes })
     if (
         hours < 10 ||
         (hours == 10 && minutes < 30) ||
@@ -79,6 +77,11 @@ async function create(req, res) {
     res.status(201).json({ data });
 }
 
+// in progress
+async function read(req, res) {
+
+}
+
 module.exports = {
     list: asyncErrorBoundary(list),
     create: [
@@ -88,4 +91,5 @@ module.exports = {
         hasEnoughPeople,
         asyncErrorBoundary(create, 400),
     ],
+    read: asyncErrorBoundary(read)
 };
