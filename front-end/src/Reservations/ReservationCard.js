@@ -11,6 +11,7 @@ function ReservationCard({reservation}) {
       <h5 className="card-title"> ID: {reservation_id}  </h5>
       <p className="card-text">Name: {first_name} {last_name}</p>
       <p className="card-text">Number Of People: {people, reservation_time}  </p>
+      <p className="card-text" data-reservation-id-status={reservation.reservation_id}>Status:   </p>
       <button
         type="button"
         className="btn btn-secondary m-1"

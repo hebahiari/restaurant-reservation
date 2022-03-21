@@ -34,10 +34,7 @@ async function create(req, res) {
 //in progress
 async function update(req, res) {
     const { reservation_id } = req.body.data
-    console.log("params", req.params)
     const { tableId } = req.params;
-    console.log({ reservation_id, tableId })
-
     const data = await service.update(tableId, reservation_id);
     res.status(201).json({ data });
 
@@ -46,7 +43,8 @@ async function update(req, res) {
 //in progress
 async function tableHasEnoughSeats(req, res, next) {
     const { tableId } = req.params;
-    const data = await service.read(tableId)
+    console.log({ tableId })
+    const data = await service.getCapacity(tableId)
     const tableCapacity = data.capacity
     next();
 }

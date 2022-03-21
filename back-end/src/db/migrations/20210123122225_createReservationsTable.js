@@ -7,6 +7,13 @@ exports.up = function(knex) {
         table.date("reservation_date");
         table.time("reservation_time");
         table.integer("people");
+        table.string("status").notNullable().defaultTo('booked');
+        // table.integer("table_id").unsigned();
+        // table
+        //     .foreign("table_id")
+        //     .references("table_id")
+        //     .inTable("tables")
+        //     .onDelete("CASCADE");
         table.timestamps(true, true);
     });
 };
