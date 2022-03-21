@@ -27,9 +27,17 @@ function getCapacity(tableId) {
         .first()
 }
 
+function numberOfPeople(reservation_id) {
+    return knex("reservations")
+        .select("people")
+        .where({ reservation_id: reservation_id })
+        .first()
+}
+
 module.exports = {
     list,
     create,
     update,
     getCapacity,
+    numberOfPeople,
 };

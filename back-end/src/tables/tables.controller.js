@@ -18,7 +18,7 @@ async function hasProperName(req, res, next) {
     const { table_name } = req.body.data;
     if (table_name.length < 2) {
         next({
-            message: "table name needs to be longer than one character",
+            message: "table_name needs to be longer than one character",
             status: 400,
         });
     }
@@ -43,9 +43,18 @@ async function update(req, res) {
 //in progress
 async function tableHasEnoughSeats(req, res, next) {
     const { tableId } = req.params;
+    const { reservation_id } = req.body.data
     console.log({ tableId })
-    const data = await service.getCapacity(tableId)
-    const tableCapacity = data.capacity
+    const tableCapacity = await service.getCapacity(tableId)
+    const capacity = tableCapacity.capacity;
+    const numberOfPeople = await service.numberOfPeople(reservation_id)
+
+    if (numberOfPeople > capacity) {
+        next({
+            message: "table capacity is not enough",
+            status: 400,
+        });
+    }
     next();
 }
 
