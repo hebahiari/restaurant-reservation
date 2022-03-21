@@ -14,7 +14,9 @@ function ReservationCard({reservation}) {
       <button
         type="button"
         className="btn btn-secondary m-1"
-        onClick={() => history.push(`/reservations/${reservation.reservation_id}/seat`)}
+        href={`/reservations/${reservation.reservation_id}/seat`}
+        onClick={() => history.push(`/reservations/${reservation.reservation_id}/seat`
+        )}
       >
         Seat
       </button>

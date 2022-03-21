@@ -14,8 +14,18 @@ async function list(req, res) {
     res.status(200).json({ data: allTables });
 }
 
+async function hasProperName(req, res, next) {
+    const { table_name } = req.body.data;
+    if (table_name.length < 2) {
+        next({
+            message: "table name needs to be longer than one character",
+            status: 400,
+        });
+    }
+    next();
+}
+
 async function create(req, res) {
-    console.log(">> req.body.data", req.body.data);
     const data = await service.create(req.body.data);
     res.status(201).json({ data });
 }
@@ -33,11 +43,20 @@ async function update(req, res) {
 
 }
 
+//in progress
+async function tableHasEnoughSeats(req, res, next) {
+    const { tableId } = req.params;
+    const data = await service.read(tableId)
+    const tableCapacity = data.capacity
+    next();
+}
+
 module.exports = {
     list: asyncErrorBoundary(list),
     create: [
         hasRequiredProperties,
+        hasProperName,
         asyncErrorBoundary(create, 400),
     ],
-    update: asyncErrorBoundary(update)
+    update: [asyncErrorBoundary(tableHasEnoughSeats), asyncErrorBoundary(update, 400)]
 };

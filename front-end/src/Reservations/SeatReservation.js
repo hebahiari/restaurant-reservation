@@ -25,8 +25,12 @@ function SeatReservation() {
 
 const handleTableChange = (event) => {
   setSelectedTableId(event.target.value);
-  console.log(selectedTableId)
+  
 };
+
+useEffect(() => {
+  console.log("table id changed", {selectedTableId})
+}, [selectedTableId]);
 
 const handleConfirmButton = (event) => {
 event.preventDefault();
@@ -38,10 +42,10 @@ seatReservation(selectedTableId, reservationId)
       <legend>Select Table</legend>
       <div>
         <label htmlFor="table">Type: </label>
-        <select id="table" name="table" required={true} onChange={handleTableChange} value={selectedTableId}>
-          {tables.map((table) => <option value={table.table_id}>{table.table_name} - {table.capacity}</option>)}
+        <select id="table" name="table_id" required={true} onChange={handleTableChange} value={selectedTableId}>
+          {tables.map((table, index) => <option value={table.table_id} key={index}>{table.table_name} - {table.capacity}</option>)}
         </select>
-        <button className="btn btn-secondary m-1" onClick={handleConfirmButton}>
+        <button type="submit" className="btn btn-secondary m-1" onClick={handleConfirmButton}>
           Confirm
         </button>
         </div>

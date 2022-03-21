@@ -22,8 +22,15 @@ function update(tableId, reservation_id) {
         .update({ reservation_id: reservation_id })
 }
 
+function read(tableId) {
+    return knex("tables")
+        .select("capacity")
+        .where({ table_id: tableId })
+        .first()
+}
 module.exports = {
     list,
     create,
     update,
+    read,
 }
