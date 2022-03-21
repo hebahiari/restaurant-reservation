@@ -1,17 +1,27 @@
 import React from "react";
 import { useHistory } from "react-router";
+import { unreserveTable } from "../utils/api"
 
 function TableCard({table}) {
 
     let history = useHistory()
     const { capacity, table_name, reservation_id } = table
 
+function handleFinishButton() {
+
+    if (
+      window.confirm("Is this table ready to seat new guests? This cannot be undone.")
+    ) {
+      unreserveTable(table.table_id).then(() => history.push("/"));
+    }
+}
+
     const finishButton = ( <button
       type="button"
       className="btn btn-secondary m-1"
       data-table-id-finish={table.table_id}
       // in progress
-      onClick={() => history.push(`/`)}
+      onClick={handleFinishButton}
     >
       Finish
     </button>)

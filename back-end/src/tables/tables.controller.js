@@ -1,6 +1,7 @@
 const service = require("./tables.service");
 const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 const hasProperties = require("../errors/hasProperties");
+const { up } = require("../db/migrations/20220318125002_createTablesTable");
 
 const hasRequiredProperties = hasProperties(
     "table_name",
@@ -33,23 +34,37 @@ async function create(req, res) {
 
 //in progress
 async function update(req, res) {
-    const { reservation_id } = req.body.data
+
     const { tableId } = req.params;
-    const data = await service.update(tableId, reservation_id);
+    const data = await service.update(tableId, req.body.data.reservation_id ? req.body.data.reservation_id : null);
     res.status(201).json({ data });
 
+}
+
+async function requestHasBody(req, res, next) {
+    const { reservation_id } = req.body.data
+
+    if (!req.body.data || !reservation_id) {
+        next({
+            message: "request needs a body that has reservation_id",
+            status: 400,
+        });
+    }
+
+    next();
 }
 
 //in progress
 async function tableHasEnoughSeats(req, res, next) {
     const { tableId } = req.params;
     const { reservation_id } = req.body.data
-    console.log({ tableId })
+
     const tableCapacity = await service.getCapacity(tableId)
     const capacity = tableCapacity.capacity;
     const numberOfPeople = await service.numberOfPeople(reservation_id)
-
-    if (numberOfPeople > capacity) {
+    const people = numberOfPeople.people
+    console.log({ capacity, numberOfPeople })
+    if (people > capacity) {
         next({
             message: "table capacity is not enough",
             status: 400,
@@ -65,5 +80,6 @@ module.exports = {
         hasProperName,
         asyncErrorBoundary(create, 400),
     ],
-    update: [asyncErrorBoundary(tableHasEnoughSeats), asyncErrorBoundary(update, 400)]
+    update: [requestHasBody, asyncErrorBoundary(tableHasEnoughSeats), asyncErrorBoundary(update, 400)],
+    delete: asyncErrorBoundary(update, 400)
 };

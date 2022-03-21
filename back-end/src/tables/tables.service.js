@@ -13,11 +13,11 @@ function create(table) {
 }
 
 /// in progress
-function update(tableId, reservation_id) {
+function update(tableId, reservation_id = null) {
     return knex("tables")
         .select("*")
         .where({ table_id: tableId })
-        .update({ reservation_id: reservation_id });
+        .update({ reservation_id: reservation_id ? reservation_id : null });
 }
 
 function getCapacity(tableId) {

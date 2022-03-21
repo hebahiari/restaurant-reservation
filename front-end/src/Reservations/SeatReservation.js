@@ -8,7 +8,7 @@ function SeatReservation() {
 
   const { reservationId } = useParams();
   const [tables, setTables] = useState([])
-  const [selectedTableId, setSelectedTableId] = useState("null")
+  const [selectedTableId, setSelectedTableId] = useState("")
   const [tablesError, setTablesError] = useState(null)
   const history = useHistory();
 
@@ -43,6 +43,7 @@ seatReservation(selectedTableId, reservationId)
       <div>
         <label htmlFor="table">Type: </label>
         <select id="table" name="table_id" required={true} onChange={handleTableChange} value={selectedTableId}>
+        <option value="" selected disabled hidden>Choose here</option>
           {tables.map((table, index) => <option value={table.table_id} key={index}>{table.table_name} - {table.capacity}</option>)}
         </select>
         <button type="submit" className="btn btn-secondary m-1" onClick={handleConfirmButton}>
