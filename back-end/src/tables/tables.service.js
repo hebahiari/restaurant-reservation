@@ -20,16 +20,16 @@ function update(tableId, reservation_id = null) {
         .update({ reservation_id: reservation_id ? reservation_id : null });
 }
 
-function getCapacity(tableId) {
+function getTable(tableId) {
     return knex("tables")
-        .select("capacity")
+        .select("*")
         .where({ table_id: tableId })
         .first()
 }
 
-function numberOfPeople(reservation_id) {
+function getReservation(reservation_id) {
     return knex("reservations")
-        .select("people")
+        .select("*")
         .where({ reservation_id: reservation_id })
         .first()
 }
@@ -38,6 +38,6 @@ module.exports = {
     list,
     create,
     update,
-    getCapacity,
-    numberOfPeople,
+    getTable,
+    getReservation,
 };
