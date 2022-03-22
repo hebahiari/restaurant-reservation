@@ -2,7 +2,6 @@ const service = require("./tables.service");
 const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 const hasProperties = require("../errors/hasProperties");
 const { up } = require("../db/migrations/20220318125002_createTablesTable");
-
 const hasRequiredProperties = hasProperties("table_name", "capacity");
 
 async function list(req, res) {
@@ -77,7 +76,7 @@ async function reservationExists(req, res, next) {
     const { reservation_id } = req.body.data;
     res.locals.reservation_id = reservation_id;
     const reservation = await service.getReservation(reservation_id);
-    console.log({ reservation });
+    res.locals.reservation = reservation;
     if (!reservation) {
         next({
             message: `this reservation_id (${reservation_id}) does not exist`,
@@ -123,21 +122,28 @@ async function tableIsOccupied(req, res, next) {
 }
 
 async function changeStatus(req, res, next) {
-
     if (req.method == "DELETE") {
         let table = res.locals.table;
         const { reservation_id } = table;
-        console.log("-------finished")
-        const data = await service.changeStatus(reservation_id, "finished")
+        const data = await service.changeStatus(reservation_id, "finished");
     } else {
-        let reservation_id = res.locals.reservation_id
-        console.log("-------seated")
-        const data = await service.changeStatus(reservation_id, "seated")
+        let reservation_id = res.locals.reservation_id;
+        const data = await service.changeStatus(reservation_id, "seated");
     }
     next();
 }
 
-
+async function reservationIsBooked(req, res, next) {
+    let reservation = res.locals.reservation;
+    console.log("reservationnnnnnnn", { reservation })
+    if (reservation.status !== "booked") {
+        next({
+            message: "status need to be booked, cannot be seated or finished",
+            status: 400,
+        });
+    }
+    next();
+}
 
 module.exports = {
     list: asyncErrorBoundary(list),
@@ -149,6 +155,7 @@ module.exports = {
     update: [
         requestHasBody,
         reservationExists,
+        reservationIsBooked,
         asyncErrorBoundary(tableHasEnoughSeats),
         tableIsAvailable,
         asyncErrorBoundary(changeStatus),
