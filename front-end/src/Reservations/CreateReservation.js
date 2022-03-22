@@ -12,8 +12,9 @@ function CreateReservation() {
     mobile_number: "",
     reservation_date: "",
     reservation_time: "",
-    people: "",
+    people: 0,
   };
+
   const [newReservation, setNewReservation] = useState(emptyReservation);
   const [newReservationsError, setNewReservationsError] = useState(null);
   const history = useHistory();
@@ -44,7 +45,7 @@ function CreateReservation() {
       <ReservationForm
         handleSubmit={handleSubmit}
         handleChange={handleChange}
-        newReservation={newReservation}
+        reservation={newReservation}
         history={history}
       />
        <ErrorAlert error={newReservationsError} />

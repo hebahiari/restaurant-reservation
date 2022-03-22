@@ -8,8 +8,9 @@ import { useParams } from "react-router";
 function EditReservation() {
   const { reservation_id } = useParams();
   const history = useHistory();
+
   const defaultReservation = {
-    first_name: "",
+    first_name: "p",
     last_name: "",
     mobile_number: "",
     reservation_date: "",
@@ -21,13 +22,15 @@ function EditReservation() {
 
   const [updatedReservation, setUpdatedReservation] =
     useState(defaultReservation);
+
   const [updateError, setUpdateError] = useState();
 
   useEffect(() => {
     getReservation(reservation_id)
       .then(setUpdatedReservation)
+      .then(() => console.log({updateReservation}))
       .catch(setUpdateError);
-  }, [reservation_id]);
+  }, []);
 
   const handleChange = (event) => {
     setUpdatedReservation({
@@ -51,9 +54,9 @@ function EditReservation() {
       <ReservationForm
         handleSubmit={handleSubmit}
         handleChange={handleChange}
-        updateReservation={updatedReservation}
+        reservation={updatedReservation}
         history={history}
-      />
+      /> 
       <ErrorAlert error={updateError} />
     </div>
   );

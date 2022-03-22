@@ -54,6 +54,17 @@ function hasEnoughPeople(req, res, next) {
     next();
 }
 
+function peopleIsANumber(req, res, next) {
+    let { people } = req.body.data;
+    if (typeof people !== "number") {
+        next({
+            message: "people is not a number",
+            status: 400,
+        });
+    }
+    next();
+}
+
 function hasFutureWorkingDate(req, res, next) {
     const { reservation_date, reservation_time } = req.body.data;
     const reservationDate = new Date(
@@ -185,6 +196,7 @@ module.exports = {
         hasFutureWorkingDate,
         hasEligibleTime,
         hasEnoughPeople,
+        peopleIsANumber,
         asyncErrorBoundary(update)
     ]
 };
