@@ -23,8 +23,16 @@ function read(reservation_id) {
         .first();
 }
 
+function changeStatus(reservation_id, status) {
+    return knex("reservations")
+        .select("*")
+        .where({ "reservation_id": reservation_id })
+        .update({ "status": status });
+}
+
 module.exports = {
     list,
     create,
     read,
+    changeStatus,
 };

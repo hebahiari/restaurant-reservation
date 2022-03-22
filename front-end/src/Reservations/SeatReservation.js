@@ -29,9 +29,9 @@ const handleTableChange = (event) => {
   
 };
 
-useEffect(() => {
-  console.log("table id changed", {selectedTableId})
-}, [selectedTableId]);
+// useEffect(() => {
+//   console.log("table id changed", {selectedTableId})
+// }, [selectedTableId]);
 
 const handleConfirmButton = (event) => {
 event.preventDefault();

@@ -135,7 +135,6 @@ async function changeStatus(req, res, next) {
 
 async function reservationIsBooked(req, res, next) {
     let reservation = res.locals.reservation;
-    console.log("reservationnnnnnnn", { reservation })
     if (reservation.status !== "booked") {
         next({
             message: "status need to be booked, cannot be seated or finished",
