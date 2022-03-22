@@ -18,7 +18,6 @@ app.use(express.json());
 app.use("/reservations", reservationsRouter);
 app.use("/tables", tablesReservations);
 
-
 app.use(notFound);
 app.use(errorHandler);
 

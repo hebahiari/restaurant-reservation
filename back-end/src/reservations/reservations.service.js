@@ -1,11 +1,18 @@
 const knex = require("../db/connection");
 const { today } = require("../utils/date-time");
 
-function list(date = today()) {
+function listByDate(date = today()) {
     return knex("reservations")
         .select("*")
         .where({ reservation_date: date })
         .whereNot("status", "finished")
+        .orderBy("reservation_time");
+}
+
+function listByNumber(mobile_number) {
+    return knex("reservations")
+        .select("*")
+        .where("mobile_number", "like", `%${mobile_number}%`)
         .orderBy("reservation_time");
 }
 
@@ -31,7 +38,8 @@ function changeStatus(reservation_id, status) {
 }
 
 module.exports = {
-    list,
+    listByDate,
+    listByNumber,
     create,
     read,
     changeStatus,

@@ -16,11 +16,6 @@ function Reservations() {
 
   const query = useQuery();
   const date = query.get("date");
-//   if (query.get("date")) {
-//     const date = query.get("date");
-//   } else {
-//     const date = today();
-//   }
 
   return (
     <Switch>

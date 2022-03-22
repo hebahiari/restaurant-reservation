@@ -122,3 +122,13 @@ export async function unreserveTable(tableId, signal) {
     };
     return await fetchJson(url, options, {});
 }
+
+export async function search(number, signal) {
+    const url = `${API_BASE_URL}/reservations?mobile_number=${number}`;
+    const options = {
+        method: "GET",
+        headers,
+        signal,
+    };
+    return await fetchJson(url, options, {});
+}

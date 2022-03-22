@@ -1,9 +1,6 @@
 import React from "react";
-import { today } from "../utils/date-time";
 
 function ReservationForm({handleChange, handleSubmit, newReservation, history}){
-
-  let todaysDate = today()
 
 return(
 <form onSubmit={handleSubmit}>

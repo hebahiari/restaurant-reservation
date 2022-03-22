@@ -3,9 +3,16 @@ const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 const hasProperties = require("../errors/hasProperties");
 
 async function list(req, res) {
-    const { date } = req.query;
-    const allReservations = await service.list(date);
-    res.status(200).json({ data: allReservations });
+    if (req.query.date) {
+        const { date } = req.query;
+        const reservationsByDate = await service.listByDate(date);
+        res.status(200).json({ data: reservationsByDate });
+    }
+    if (req.query.mobile_number) {
+        const { mobile_number } = req.query
+        const reservationsByNumber = await service.listByNumber(mobile_number);
+        res.status(200).json({ data: reservationsByNumber });
+    }
 }
 
 async function create(req, res) {
@@ -113,7 +120,6 @@ async function changeStatus(req, res, next) {
     const reservation = res.locals.reservation;
     const { status } = req.body.data;
     const data = await service.changeStatus(reservation.reservation_id, status);
-    console.log("------------ returning:", data)
     res.status(200).json({ data });
 }
 

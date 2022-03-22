@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { listReservations, listTables } from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert";
 import { previous, next, today } from "../utils/date-time";
@@ -17,8 +17,7 @@ function Dashboard({ date }) {
   const [tables, setTables] = useState([])
   const [reservationsError, setReservationsError] = useState(null);
   const [tablesError, setTablesError] = useState(null)
-  const location = useLocation();
-
+  
   const query = useQuery();
   if (query.get("date")) {
     date = query.get("date");
