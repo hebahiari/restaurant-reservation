@@ -10,12 +10,12 @@ function EditReservation() {
   const history = useHistory();
 
   const defaultReservation = {
-    first_name: "p",
+    first_name: "",
     last_name: "",
     mobile_number: "",
     reservation_date: "",
     reservation_time: "",
-    people: "",
+    people: 0,
     status: "",
     reservation_id: reservation_id,
   };
@@ -30,7 +30,7 @@ function EditReservation() {
       .then(setUpdatedReservation)
       .then(() => console.log({updateReservation}))
       .catch(setUpdateError);
-  }, []);
+  }, [reservation_id]);
 
   const handleChange = (event) => {
     setUpdatedReservation({
