@@ -34,13 +34,16 @@ async function create(req, res) {
 }
 
 //in progress
-async function update(req, res) {
+async function update(req, res, next) {
     const { tableId } = req.params;
+    res.locals.tableId = tableId;
     const data = await service.update(
         tableId,
         req.body.data ? req.body.data.reservation_id : null
     );
-    res.status(200).json({ data });
+
+    console.log("update returns:", data);
+    next();
 }
 
 async function requestHasBody(req, res, next) {
@@ -76,7 +79,6 @@ async function tableHasEnoughSeats(req, res, next) {
 async function reservationExists(req, res, next) {
     const { reservation_id } = req.body.data;
     const reservation = await service.getReservation(reservation_id);
-    console.log({ reservation })
     if (!reservation) {
         next({
             message: `this reservation_id (${reservation_id}) does not exist`,
@@ -87,7 +89,7 @@ async function reservationExists(req, res, next) {
 }
 
 async function tableIsAvailable(req, res, next) {
-    let table = res.locals.table
+    let table = res.locals.table;
     if (table.reservation_id) {
         next({
             message: "this table is occupied",
@@ -111,7 +113,7 @@ async function tableExists(req, res, next) {
 }
 
 async function tableIsOccupied(req, res, next) {
-    let table = res.locals.table
+    let table = res.locals.table;
     if (!table.reservation_id) {
         next({
             message: "this table is not occupied",
@@ -121,7 +123,24 @@ async function tableIsOccupied(req, res, next) {
     next();
 }
 
+async function changeStatus(req, res, next) {
+    let table = res.locals.table;
+    let newStatus = "";
+    if (req.method == "DELETE") {
+        console.log("--------------finishing")
+        newStatus = "finished";
+        const data = await service.changeStatus(table.table_id, newStatus);
+        res.status(200);
 
+        next();
+    } else {
+        console.log("---------------seating")
+        newStatus = "seated";
+    }
+    const data = await service.changeStatus(table.table_id, newStatus);
+    console.log("result", { data });
+    res.status(200);
+}
 
 module.exports = {
     list: asyncErrorBoundary(list),
@@ -136,6 +155,12 @@ module.exports = {
         asyncErrorBoundary(tableHasEnoughSeats),
         tableIsAvailable,
         asyncErrorBoundary(update, 400),
+        asyncErrorBoundary(changeStatus),
     ],
-    delete: [asyncErrorBoundary(tableExists), tableIsOccupied, asyncErrorBoundary(update, 400)],
+    delete: [
+        asyncErrorBoundary(tableExists),
+        tableIsOccupied,
+        asyncErrorBoundary(changeStatus),
+        asyncErrorBoundary(update, 400),
+    ],
 };

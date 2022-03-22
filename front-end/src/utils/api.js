@@ -102,7 +102,7 @@ export async function createTable(table, signal) {
 
 /// in progress
 export async function seatReservation(selectedTableId, reservationId, signal) {
-    const url = `${API_BASE_URL}/tables/${selectedTableId}/seat/`;
+    const url = `${API_BASE_URL}/tables/${selectedTableId}/seat`;
     const options = {
         method: "PUT",
         headers,
@@ -113,7 +113,7 @@ export async function seatReservation(selectedTableId, reservationId, signal) {
 }
 
 export async function unreserveTable(tableId, signal) {
-    const url = `${API_BASE_URL}/tables/${tableId}/seat/`;
+    const url = `${API_BASE_URL}/tables/${tableId}/seat`;
     const options = {
         method: "DELETE",
         body: JSON.stringify({ data: {} }),
