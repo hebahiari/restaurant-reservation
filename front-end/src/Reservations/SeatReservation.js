@@ -3,6 +3,7 @@ import { useHistory } from "react-router";
 import { listTables } from "../utils/api"
 import { useParams } from "react-router-dom"
 import { seatReservation } from "../utils/api";
+import ErrorAlert from "../layout/ErrorAlert";
 
 function SeatReservation() {
 
@@ -36,6 +37,7 @@ const handleConfirmButton = (event) => {
 event.preventDefault();
 seatReservation(selectedTableId, reservationId)
 .then(() => history.push("/"))
+.catch(setTablesError)
 };
 
     return ( <fieldset>
@@ -49,6 +51,7 @@ seatReservation(selectedTableId, reservationId)
         <button type="submit" className="btn btn-secondary m-1" onClick={handleConfirmButton}>
           Confirm
         </button>
+        <ErrorAlert error={tablesError} />
         </div>
         </fieldset>)
 

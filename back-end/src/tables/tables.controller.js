@@ -38,7 +38,7 @@ async function update(req, res) {
     const { tableId } = req.params;
     const data = await service.update(
         tableId,
-        req.body.data.reservation_id ? req.body.data.reservation_id : null
+        req.body.data ? req.body.data.reservation_id : null
     );
     res.status(200).json({ data });
 }
@@ -97,6 +97,31 @@ async function tableIsAvailable(req, res, next) {
     next();
 }
 
+async function tableExists(req, res, next) {
+    const { tableId } = req.params;
+    const table = await service.getTable(tableId);
+    res.locals.table = table;
+    if (!table) {
+        next({
+            message: `this table (${tableId}) does not exist`,
+            status: 404,
+        });
+    }
+    next();
+}
+
+async function tableIsOccupied(req, res, next) {
+    let table = res.locals.table
+    if (!table.reservation_id) {
+        next({
+            message: "this table is not occupied",
+            status: 400,
+        });
+    }
+    next();
+}
+
+
 
 module.exports = {
     list: asyncErrorBoundary(list),
@@ -112,5 +137,5 @@ module.exports = {
         tableIsAvailable,
         asyncErrorBoundary(update, 400),
     ],
-    delete: asyncErrorBoundary(update, 400),
+    delete: [asyncErrorBoundary(tableExists), tableIsOccupied, asyncErrorBoundary(update, 400)],
 };

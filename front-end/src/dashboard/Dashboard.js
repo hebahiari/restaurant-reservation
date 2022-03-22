@@ -73,6 +73,7 @@ function Dashboard({ date }) {
         </button>
         <h2>Tables</h2>
       <ListTables tables={tables} />
+      <ErrorAlert error={tablesError} />
       </div>
     </main>
   );
