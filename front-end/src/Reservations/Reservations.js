@@ -13,7 +13,6 @@ import useQuery from "../utils/useQuery";
  */
 
 function Reservations() {
-
   const query = useQuery();
   const date = query.get("date");
 
@@ -22,9 +21,7 @@ function Reservations() {
       <Route exact={true} path="/reservations/new">
         <CreateReservations />
       </Route>
-      <Route path="/reservations/:reservationId/seat">
-
-      </Route>
+      <Route path="/reservations/:reservationId/seat"></Route>
       <Route path="/reservations">
         <Dashboard date={date} />
       </Route>

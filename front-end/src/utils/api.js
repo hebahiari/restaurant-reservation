@@ -133,7 +133,6 @@ export async function search(number, signal) {
     return await fetchJson(url, options, {});
 }
 
-
 export async function getReservation(reservation_id, signal) {
     const url = `${API_BASE_URL}/reservations/${reservation_id}`;
     const options = {
@@ -144,7 +143,11 @@ export async function getReservation(reservation_id, signal) {
     return await fetchJson(url, options, {});
 }
 
-export async function updateReservation(reservation_id, updatedReservation, signal) {
+export async function updateReservation(
+    reservation_id,
+    updatedReservation,
+    signal
+) {
     const url = `${API_BASE_URL}/reservations/${reservation_id}`;
     const options = {
         method: "PUT",

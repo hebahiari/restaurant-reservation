@@ -21,26 +21,22 @@ function update(tableId, reservation_id = null) {
 }
 
 function getTable(tableId) {
-    return knex("tables")
-        .select("*")
-        .where({ table_id: tableId })
-        .first()
+    return knex("tables").select("*").where({ table_id: tableId }).first();
 }
 
 function getReservation(reservation_id) {
     return knex("reservations")
         .select("*")
         .where({ reservation_id: reservation_id })
-        .first()
+        .first();
 }
 
 function changeStatus(reservation_id, newStatus) {
     return knex("reservations")
         .select("*")
-        .where({ "reservation_id": reservation_id })
-        .update({ "status": newStatus });
+        .where({ reservation_id: reservation_id })
+        .update({ status: newStatus });
 }
-
 
 module.exports = {
     list,

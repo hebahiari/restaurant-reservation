@@ -9,7 +9,7 @@ async function list(req, res) {
         res.status(200).json({ data: reservationsByDate });
     }
     if (req.query.mobile_number) {
-        const { mobile_number } = req.query
+        const { mobile_number } = req.query;
         const reservationsByNumber = await service.listByNumber(mobile_number);
         res.status(200).json({ data: reservationsByNumber });
     }
@@ -28,9 +28,8 @@ async function read(req, res) {
 
 async function update(req, res) {
     const { reservation_id } = req.params;
-    const updatedReservation = req.body.data
+    const updatedReservation = req.body.data;
     const data = await service.update(reservation_id, updatedReservation);
-    console.log("updated !!!!!!!!!!!!!!!", data)
     res.status(200).json({ data });
 }
 
@@ -144,14 +143,18 @@ async function changeStatus(req, res, next) {
     const reservation = res.locals.reservation;
     const { status } = req.body.data;
     const data = await service.changeStatus(reservation.reservation_id, status);
-    console.log("changed status data !!!!!!!!", data)
     res.status(200).json({ data });
 }
 
 async function bodyHasValidStatus(req, res, next) {
     const { status } = req.body.data;
     if (!status ||
-        !(status == "booked" || status == "seated" || status == "finished" || status == "cancelled")
+        !(
+            status == "booked" ||
+            status == "seated" ||
+            status == "finished" ||
+            status == "cancelled"
+        )
     ) {
         next({
             message: `status is unknown`,
@@ -197,6 +200,6 @@ module.exports = {
         hasEligibleTime,
         hasEnoughPeople,
         peopleIsANumber,
-        asyncErrorBoundary(update)
-    ]
+        asyncErrorBoundary(update),
+    ],
 };

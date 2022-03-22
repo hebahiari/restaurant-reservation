@@ -10,14 +10,16 @@ function listByDate(date = today()) {
 }
 
 function listByNumber(mobile_number) {
-    return knex("reservations")
+    return (
+        knex("reservations")
         .select("*")
         // .where("mobile_number", "like", `%${mobile_number}%`)
         .whereRaw(
             "translate(mobile_number, '() -', '') like ?",
             `%${mobile_number.replace(/\D/g, "")}%`
         )
-        .orderBy("reservation_time");
+        .orderBy("reservation_time")
+    );
 }
 
 function create(reservation) {
@@ -37,19 +39,19 @@ function read(reservation_id) {
 function update(reservation_id, updatedReservation) {
     return knex("reservations")
         .select("*")
-        .where({ "reservation_id": reservation_id })
+        .where({ reservation_id: reservation_id })
         .update(updatedReservation)
         .returning("*")
-        .then((updatedReservation) => updatedReservation[0])
+        .then((updatedReservation) => updatedReservation[0]);
 }
 
 function changeStatus(reservation_id, status) {
     return knex("reservations")
         .select("*")
-        .where({ "reservation_id": reservation_id })
-        .update({ "status": status })
+        .where({ reservation_id: reservation_id })
+        .update({ status: status })
         .returning("*")
-        .then((updatedReservation) => updatedReservation[0])
+        .then((updatedReservation) => updatedReservation[0]);
 }
 
 module.exports = {

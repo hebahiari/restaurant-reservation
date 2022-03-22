@@ -28,7 +28,7 @@ function EditReservation() {
   useEffect(() => {
     getReservation(reservation_id)
       .then(setUpdatedReservation)
-      .then(() => console.log({updateReservation}))
+      .then(() => console.log({ updateReservation }))
       .catch(setUpdateError);
   }, [reservation_id]);
 
@@ -42,10 +42,8 @@ function EditReservation() {
   const handleSubmit = (event) => {
     event.preventDefault();
     updatedReservation(updatedReservation)
-    .then(() =>
-      history.push(`/reservations/${reservation_id}`)
-    )
-    .catch(setUpdateError)
+      .then(() => history.push(`/reservations/${reservation_id}`))
+      .catch(setUpdateError);
   };
 
   return (
@@ -56,7 +54,7 @@ function EditReservation() {
         handleChange={handleChange}
         reservation={updatedReservation}
         history={history}
-      /> 
+      />
       <ErrorAlert error={updateError} />
     </div>
   );

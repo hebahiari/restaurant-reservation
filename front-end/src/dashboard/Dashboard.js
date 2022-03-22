@@ -14,10 +14,10 @@ import ListTables from "../Tables/ListTables";
  */
 function Dashboard({ date }) {
   const [reservations, setReservations] = useState([]);
-  const [tables, setTables] = useState([])
+  const [tables, setTables] = useState([]);
   const [reservationsError, setReservationsError] = useState(null);
-  const [tablesError, setTablesError] = useState(null)
-  
+  const [tablesError, setTablesError] = useState(null);
+
   const query = useQuery();
   if (query.get("date")) {
     date = query.get("date");
@@ -31,9 +31,7 @@ function Dashboard({ date }) {
     listReservations({ date }, abortController.signal)
       .then(setReservations)
       .catch(setReservationsError);
-    listTables(abortController.signal)
-    .then(setTables)
-    .catch(setTablesError)
+    listTables(abortController.signal).then(setTables).catch(setTablesError);
     return () => abortController.abort();
   }
 
@@ -71,8 +69,8 @@ function Dashboard({ date }) {
           Next Day
         </button>
         <h2>Tables</h2>
-      <ListTables tables={tables} />
-      <ErrorAlert error={tablesError} />
+        <ListTables tables={tables} />
+        <ErrorAlert error={tablesError} />
       </div>
     </main>
   );
