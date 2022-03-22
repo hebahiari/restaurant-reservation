@@ -75,8 +75,9 @@ async function tableHasEnoughSeats(req, res, next) {
 
 async function reservationExists(req, res, next) {
     const { reservation_id } = req.body.data;
+    res.locals.reservation_id = reservation_id;
     const reservation = await service.getReservation(reservation_id);
-    console.log({ reservation })
+    console.log({ reservation });
     if (!reservation) {
         next({
             message: `this reservation_id (${reservation_id}) does not exist`,
@@ -87,7 +88,7 @@ async function reservationExists(req, res, next) {
 }
 
 async function tableIsAvailable(req, res, next) {
-    let table = res.locals.table
+    let table = res.locals.table;
     if (table.reservation_id) {
         next({
             message: "this table is occupied",
@@ -111,12 +112,27 @@ async function tableExists(req, res, next) {
 }
 
 async function tableIsOccupied(req, res, next) {
-    let table = res.locals.table
+    let table = res.locals.table;
     if (!table.reservation_id) {
         next({
             message: "this table is not occupied",
             status: 400,
         });
+    }
+    next();
+}
+
+async function changeStatus(req, res, next) {
+
+    if (req.method == "DELETE") {
+        let table = res.locals.table;
+        const { reservation_id } = table;
+        console.log("-------finished")
+        const data = await service.changeStatus(reservation_id, "finished")
+    } else {
+        let reservation_id = res.locals.reservation_id
+        console.log("-------seated")
+        const data = await service.changeStatus(reservation_id, "seated")
     }
     next();
 }
@@ -135,7 +151,13 @@ module.exports = {
         reservationExists,
         asyncErrorBoundary(tableHasEnoughSeats),
         tableIsAvailable,
+        asyncErrorBoundary(changeStatus),
         asyncErrorBoundary(update, 400),
     ],
-    delete: [asyncErrorBoundary(tableExists), tableIsOccupied, asyncErrorBoundary(update, 400)],
+    delete: [
+        asyncErrorBoundary(tableExists),
+        tableIsOccupied,
+        asyncErrorBoundary(changeStatus),
+        asyncErrorBoundary(update, 400),
+    ],
 };
