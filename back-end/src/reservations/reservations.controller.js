@@ -26,6 +26,14 @@ async function read(req, res) {
     res.status(200).json({ data });
 }
 
+async function update(req, res) {
+    const { reservation_id } = req.params;
+    const updatedReservation = req.body.data
+    const data = await service.update(reservation_id, updatedReservation);
+    console.log("updated !!!!!!!!!!!!!!!", data)
+    res.status(200).json({ data });
+}
+
 const hasRequiredProperties = hasProperties(
     "first_name",
     "last_name",
@@ -54,6 +62,13 @@ function hasFutureWorkingDate(req, res, next) {
     res.locals.time = reservationDate;
     const today = new Date();
 
+    if (isNaN(reservationDate.getDate())) {
+        next({
+            message: `reservation_date / reservation_time incorrect`,
+            status: 400,
+        });
+    }
+
     if (reservationDate.getUTCDay() == 2) {
         next({
             message: "Restaurant is closed on tuesdays",
@@ -71,8 +86,6 @@ function hasFutureWorkingDate(req, res, next) {
 }
 
 async function hasEligibleTime(req, res, next) {
-    let time = res.locals.time;
-
     let hours = res.locals.time.getUTCHours();
     let minutes = res.locals.time.getUTCMinutes();
     if (
@@ -120,13 +133,14 @@ async function changeStatus(req, res, next) {
     const reservation = res.locals.reservation;
     const { status } = req.body.data;
     const data = await service.changeStatus(reservation.reservation_id, status);
+    console.log("changed status data !!!!!!!!", data)
     res.status(200).json({ data });
 }
 
 async function bodyHasValidStatus(req, res, next) {
     const { status } = req.body.data;
     if (!status ||
-        !(status == "booked" || status == "seated" || status == "finished")
+        !(status == "booked" || status == "seated" || status == "finished" || status == "cancelled")
     ) {
         next({
             message: `status is unknown`,
@@ -158,10 +172,19 @@ module.exports = {
         asyncErrorBoundary(create, 400),
     ],
     read: asyncErrorBoundary(read),
-    update: [
+    updateStatus: [
         asyncErrorBoundary(reservationExists),
         reservationIsNotFinished,
         bodyHasValidStatus,
         asyncErrorBoundary(changeStatus),
     ],
+    update: [
+        asyncErrorBoundary(reservationExists),
+        hasRequiredProperties,
+        statusIsBooked,
+        hasFutureWorkingDate,
+        hasEligibleTime,
+        hasEnoughPeople,
+        asyncErrorBoundary(update)
+    ]
 };

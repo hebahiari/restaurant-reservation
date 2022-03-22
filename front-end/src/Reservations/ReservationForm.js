@@ -1,6 +1,6 @@
 import React from "react";
 
-function ReservationForm({handleChange, handleSubmit, newReservation, history}){
+function ReservationForm({handleChange, handleSubmit, reservation, history}){
 
 return(
 <form onSubmit={handleSubmit}>
@@ -14,7 +14,7 @@ return(
             name="first_name"
             required
             onChange={handleChange}
-            value={newReservation.first_name}
+            value={reservation.first_name}
             placeholder="Insert first name here"
           />
         </div>
@@ -29,7 +29,7 @@ return(
             name="last_name"
             required
             onChange={handleChange}
-            value={newReservation.last_name}
+            value={reservation.last_name}
             placeholder="Insert last name here"
           />
         </div>
@@ -46,7 +46,7 @@ return(
             name="mobile_number"
             required
             onChange={handleChange}
-            value={newReservation.mobile_number}
+            value={reservation.mobile_number}
             placeholder="ex: 000-000-0000"
           />
         </div>
@@ -63,7 +63,7 @@ return(
             // min={todaysDate}
             required
             onChange={handleChange}
-            value={newReservation.reservation_date}
+            value={reservation.reservation_date}
             placeholder="YYYY-MM-DD" 
             pattern="\d{4}-\d{2}-\d{2}"
           />
@@ -82,7 +82,7 @@ return(
             name="reservation_time"
             required
             onChange={handleChange}
-            value={newReservation.reservation_time}
+            value={reservation.reservation_time}
             placeholder="HH:MM" 
             pattern="[0-9]{2}:[0-9]{2}"
           />
@@ -100,7 +100,7 @@ return(
             name="people"
             required
             onChange={handleChange}
-            value={newReservation.people}
+            value={reservation.people}
           />
         </div>
 

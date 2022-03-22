@@ -132,3 +132,36 @@ export async function search(number, signal) {
     };
     return await fetchJson(url, options, {});
 }
+
+
+export async function getReservation(reservation_id, signal) {
+    const url = `${API_BASE_URL}/reservations/${reservation_id}`;
+    const options = {
+        method: "GET",
+        headers,
+        signal,
+    };
+    return await fetchJson(url, options, {});
+}
+
+export async function updateReservation(reservation_id, updatedReservation, signal) {
+    const url = `${API_BASE_URL}/reservations/${reservation_id}`;
+    const options = {
+        method: "PUT",
+        body: JSON.stringify({ data: updatedReservation }),
+        headers,
+        signal,
+    };
+    return await fetchJson(url, options, {});
+}
+
+export async function changeStatus(reservation_id, status, signal) {
+    const url = `${API_BASE_URL}/reservations/${reservation_id}/status`;
+    const options = {
+        method: "PUT",
+        body: JSON.stringify({ data: { status } }),
+        headers,
+        signal,
+    };
+    return await fetchJson(url, options, {});
+}

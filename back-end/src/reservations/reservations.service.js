@@ -34,6 +34,13 @@ function read(reservation_id) {
         .first();
 }
 
+function update(reservation_id, updatedReservation) {
+    return knex("reservations")
+        .select("*")
+        .where({ "reservation_id": reservation_id })
+        .update(updatedReservation)
+}
+
 function changeStatus(reservation_id, status) {
     return knex("reservations")
         .select("*")
@@ -46,5 +53,6 @@ module.exports = {
     listByNumber,
     create,
     read,
+    update,
     changeStatus,
 };
