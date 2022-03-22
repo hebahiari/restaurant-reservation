@@ -34,20 +34,10 @@ function getReservation(reservation_id) {
         .first()
 }
 
-
-function changeStatus(tableId, newStatus) {
-    return knex("reservations as r")
-        .select("*")
-        .join("tables as t", "t.reservation_id", "r.reservation_id")
-        .where({ "t.table_id": tableId })
-        //.update({ "r.status": newStatus });
-}
-
 module.exports = {
     list,
     create,
     update,
     getTable,
     getReservation,
-    changeStatus
 };
