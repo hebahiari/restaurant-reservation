@@ -43,11 +43,11 @@ function Dashboard({ date }) {
   return (
     <main>
       <h1>Dashboard</h1>
-      <div className="d-md-flex mb-3">
-        <h4 className="mb-0">Reservations for date</h4>
-      </div>
       <ErrorAlert error={reservationsError} />
       <h2>Reservations</h2>
+      <div className="d-md-flex mb-3">
+        <h6 className="mb-0">Date: {date ? date : todaysDate}</h6>
+      </div>
       <ListReservations reservations={reservations} />
       <div>
         <button
@@ -68,6 +68,7 @@ function Dashboard({ date }) {
         >
           Next Day
         </button>
+        <p></p>
         <h2>Tables</h2>
         <ListTables tables={tables} />
         <ErrorAlert error={tablesError} />

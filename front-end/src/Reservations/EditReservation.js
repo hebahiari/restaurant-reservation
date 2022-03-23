@@ -6,43 +6,45 @@ import ErrorAlert from "../layout/ErrorAlert";
 import { useParams } from "react-router";
 
 function EditReservation() {
-  const { reservation_id } = useParams();
+  const { reservationId } = useParams();
   const history = useHistory();
 
   const defaultReservation = {
-    first_name: "",
+    first_name: "hi",
     last_name: "",
     mobile_number: "",
     reservation_date: "",
     reservation_time: "",
     people: 0,
-    status: "",
-    reservation_id: reservation_id,
+    reservation_id: reservationId,
   };
 
-  const [updatedReservation, setUpdatedReservation] =
+  const [reservation, setReservation] =
     useState(defaultReservation);
 
   const [updateError, setUpdateError] = useState();
 
+  //loading the current reservations' data
   useEffect(() => {
-    getReservation(reservation_id)
-      .then(setUpdatedReservation)
-      .then(() => console.log({ updateReservation }))
-      .catch(setUpdateError);
-  }, [reservation_id]);
+    const abortController = new AbortController();
+    setUpdateError(null);
+    getReservation(reservationId, abortController.signal)
+    .then(setReservation)
+    .catch(setUpdateError);
+    return () => abortController.abort();
+  }, [reservationId]);
 
   const handleChange = (event) => {
-    setUpdatedReservation({
-      ...updatedReservation,
+    setReservation({
+      ...reservation,
       [event.target.name]: event.target.value,
     });
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    updatedReservation(updatedReservation)
-      .then(() => history.push(`/reservations/${reservation_id}`))
+    updateReservation(reservationId, reservation)
+      .then(() => history.push(`/reservations/${reservationId}`))
       .catch(setUpdateError);
   };
 
@@ -52,10 +54,10 @@ function EditReservation() {
       <ReservationForm
         handleSubmit={handleSubmit}
         handleChange={handleChange}
-        reservation={updatedReservation}
+        reservation={reservation}
         history={history}
       />
-      <ErrorAlert error={updateError} />
+      {/* <ErrorAlert error={updateError} /> */}
     </div>
   );
 }

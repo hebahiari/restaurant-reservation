@@ -23,6 +23,7 @@ async function create(req, res) {
 async function read(req, res) {
     const { reservation_id } = req.params;
     const data = await service.read(reservation_id);
+    console.log({ data });
     res.status(200).json({ data });
 }
 
@@ -44,7 +45,7 @@ const hasRequiredProperties = hasProperties(
 
 function hasEnoughPeople(req, res, next) {
     let { people } = req.body.data;
-    if (typeof parseInt(people) !== "number" || people < 1) {
+    if (typeof people !== "number" || people < 1) {
         next({
             message: "people has to be a number above zero",
             status: 400,
@@ -72,6 +73,7 @@ function hasFutureWorkingDate(req, res, next) {
     res.locals.time = reservationDate;
     const today = new Date();
 
+    console.log({ reservationDate });
     if (isNaN(reservationDate.getDate())) {
         next({
             message: `reservation_date / reservation_time incorrect`,
@@ -185,7 +187,10 @@ module.exports = {
         hasEnoughPeople,
         asyncErrorBoundary(create, 400),
     ],
-    read: asyncErrorBoundary(read),
+    read: [
+        asyncErrorBoundary(reservationExists),
+        asyncErrorBoundary(read)
+    ],
     updateStatus: [
         asyncErrorBoundary(reservationExists),
         reservationIsNotFinished,

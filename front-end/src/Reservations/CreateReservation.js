@@ -14,30 +14,30 @@ function CreateReservation() {
     people: 0,
   };
 
-  const [newReservation, setNewReservation] = useState(emptyReservation);
+  const [reservation, setReservation] = useState(emptyReservation);
   const [newReservationsError, setNewReservationsError] = useState(null);
   const history = useHistory();
 
   const handleChange = (event) => {
-    setNewReservation({
-      ...newReservation,
+    setReservation({
+      ...reservation,
       [event.target.name]: event.target.value,
     });
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    createNewReservation(newReservation);
+    createNewReservation(reservation);
   };
 
-  function createNewReservation(newReservation) {
+  function createNewReservation(reservation) {
     const abortController = new AbortController();
     setNewReservationsError(null);
-    createReservation(newReservation, abortController.signal)
+    createReservation(reservation, abortController.signal)
       .then(() =>
-        history.push(`/reservations?date=${newReservation.reservation_date}`)
+        history.push(`/reservations?date=${reservation.reservation_date}`)
       )
-      .then(() => setNewReservation(emptyReservation))
+      .then(() => setReservation(emptyReservation))
       .catch(setNewReservationsError);
     return () => abortController.abort();
   }
@@ -48,7 +48,7 @@ function CreateReservation() {
       <ReservationForm
         handleSubmit={handleSubmit}
         handleChange={handleChange}
-        reservation={newReservation}
+        reservation={reservation}
         history={history}
       />
       <ErrorAlert error={newReservationsError} />
