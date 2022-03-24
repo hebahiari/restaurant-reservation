@@ -4,7 +4,7 @@ import { listTables } from "../utils/api";
 import { useParams } from "react-router-dom";
 import { seatReservation } from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert";
-
+//hi
 function SeatReservation() {
   const { reservationId } = useParams();
   const [tables, setTables] = useState([]);
