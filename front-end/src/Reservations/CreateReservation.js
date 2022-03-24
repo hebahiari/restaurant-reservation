@@ -49,7 +49,7 @@ function CreateReservation() {
   }
 
   return (
-    <div>
+    <div className="card bg-dark col-md-8 my-3">
       <h1>Create New Reservation</h1>
       <ReservationForm
         handleSubmit={handleSubmit}

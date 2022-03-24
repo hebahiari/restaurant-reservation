@@ -20,7 +20,7 @@ function handleFinishButton() {
 
     const finishButton = ( <button
       type="button"
-      className="btn btn-secondary m-1"
+      className="btn btn-success m-1"
       data-table-id-finish={table.table_id}
       // in progress
       onClick={handleFinishButton}
@@ -28,7 +28,7 @@ function handleFinishButton() {
       Finish
     </button>)
 
-    return (<div className="card my-3" style={{ width: "40rem" }}>
+    return (<div className="card text-white m-3 row-md-2 border-0 ">
     <div className="card-body">
       <h5 className="card-title"> Table Name: {table_name}  </h5>
       <p className="card-text">Capacity {capacity}</p>

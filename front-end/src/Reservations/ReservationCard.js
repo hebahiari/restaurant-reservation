@@ -20,7 +20,7 @@ function ReservationCard({ reservation }) {
   const seatButton = (
     <button
       type="button"
-      className="btn btn-secondary m-1"
+      className="btn btn-light m-1"
       href={`/reservations/${reservation.reservation_id}/seat`}
       onClick={() =>
         history.push(`/reservations/${reservation.reservation_id}/seat`)
@@ -33,7 +33,7 @@ function ReservationCard({ reservation }) {
   const editButton = (
     <button
       type="button"
-      className="btn btn-secondary m-1"
+      className="btn btn-success m-1"
       href={`/reservations/${reservation.reservation_id}/edit`}
       onClick={() =>
         history.push(`/reservations/${reservation.reservation_id}/edit`)
@@ -65,9 +65,9 @@ function ReservationCard({ reservation }) {
   );
 
   return (
-    <div className="card my-3" style={{ width: "40rem" }}>
+    <div className="card text-white m-3 row-md-2 border-0 ">
+      <h5 className="card-header"> Reservation ID: {reservation_id} </h5>
       <div className="card-body">
-        <h5 className="card-title"> ID: {reservation_id} </h5>
         <p className="card-text">
           Name: {first_name} {last_name}
         </p>
