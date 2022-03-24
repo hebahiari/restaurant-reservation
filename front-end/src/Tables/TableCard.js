@@ -1,6 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router";
-import { unreserveTable } from "../utils/api"
+import { changeStatus, unreserveTable } from "../utils/api"
 
 function TableCard({table}) {
 
@@ -12,7 +12,9 @@ function handleFinishButton() {
     if (
       window.confirm("Is this table ready to seat new guests? This cannot be undone.")
     ) {
-      unreserveTable(table.table_id).then(() => history.push("/"));
+      unreserveTable(table.table_id)
+      .then(() => changeStatus(reservation_id, "finished"))
+      .then(() => history.push("/"));
     }
 }
 

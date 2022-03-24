@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
-import { listTables } from "../utils/api";
+import { changeStatus, listTables } from "../utils/api";
 import { useParams } from "react-router-dom";
 import { seatReservation } from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert";
@@ -14,24 +14,26 @@ function SeatReservation() {
 
   useEffect(loadTables, []);
 
+  // sending an api call to retrieve the tables information
   function loadTables() {
     const abortController = new AbortController();
     setTablesError(null);
-    listTables(abortController.signal).then(setTables).catch(setTablesError);
+    listTables(abortController.signal)
+    .then(setTables)
+    .catch(setTablesError);
     return () => abortController.abort();
   }
 
+  // controlling the component
   const handleTableChange = (event) => {
     setSelectedTableId(event.target.value);
   };
 
-  // useEffect(() => {
-  //   console.log("table id changed", {selectedTableId})
-  // }, [selectedTableId]);
-
+// sending an api call to add the reservation id to the selected table
   const handleConfirmButton = (event) => {
     event.preventDefault();
     seatReservation(selectedTableId, reservationId)
+      .then(() => changeStatus(reservationId, "seated"))
       .then(() => history.push("/"))
       .catch(setTablesError);
   };

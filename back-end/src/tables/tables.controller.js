@@ -1,13 +1,27 @@
 const service = require("./tables.service");
 const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 const hasProperties = require("../errors/hasProperties");
-const { up } = require("../db/migrations/20220318125002_createTablesTable");
 const hasRequiredProperties = hasProperties("table_name", "capacity");
 
 async function list(req, res) {
     const { date } = req.query;
     const allTables = await service.list(date);
     res.status(200).json({ data: allTables });
+}
+
+async function create(req, res) {
+    const data = await service.create(req.body.data);
+    res.status(201).json({ data });
+}
+
+//in progress
+async function update(req, res) {
+    const { tableId } = req.params;
+    const data = await service.update(
+        tableId,
+        req.body.data ? req.body.data.reservation_id : null
+    );
+    res.status(200).json({ data });
 }
 
 async function hasProperNameAndCapacity(req, res, next) {
@@ -27,21 +41,6 @@ async function hasProperNameAndCapacity(req, res, next) {
     next();
 }
 
-async function create(req, res) {
-    const data = await service.create(req.body.data);
-    res.status(201).json({ data });
-}
-
-//in progress
-async function update(req, res) {
-    const { tableId } = req.params;
-    const data = await service.update(
-        tableId,
-        req.body.data ? req.body.data.reservation_id : null
-    );
-    res.status(200).json({ data });
-}
-
 async function requestHasBody(req, res, next) {
     if (!req.body || !req.body.data || !req.body.data.reservation_id) {
         next({
@@ -50,16 +49,18 @@ async function requestHasBody(req, res, next) {
         });
     }
 
+    res.locals.reservation = req.body.data
     next();
 }
 
 //in progress
 async function tableHasEnoughSeats(req, res, next) {
     const { tableId } = req.params;
-    const { reservation_id } = req.body.data;
+    const reservation_id = res.locals.reservation.reservation_id
 
     const table = await service.getTable(tableId);
     res.locals.table = table;
+
     const capacity = table.capacity;
     const numberOfPeople = await service.getReservation(reservation_id);
     const people = numberOfPeople.people;
@@ -121,17 +122,17 @@ async function tableIsOccupied(req, res, next) {
     next();
 }
 
-async function changeStatus(req, res, next) {
-    if (req.method == "DELETE") {
-        let table = res.locals.table;
-        const { reservation_id } = table;
-        const data = await service.changeStatus(reservation_id, "finished");
-    } else {
-        let reservation_id = res.locals.reservation_id;
-        const data = await service.changeStatus(reservation_id, "seated");
-    }
-    next();
-}
+// async function changeStatus(req, res, next) {
+//     if (req.method == "DELETE") {
+//         let table = res.locals.table;
+//         const { reservation_id } = table;
+//         const data = await service.changeStatus(reservation_id, "finished");
+//     } else {
+//         let reservation_id = res.locals.reservation_id;
+//         const data = await service.changeStatus(reservation_id, "seated");
+//     }
+//     next();
+// }
 
 async function reservationIsBooked(req, res, next) {
     let reservation = res.locals.reservation;
@@ -157,13 +158,11 @@ module.exports = {
         reservationIsBooked,
         asyncErrorBoundary(tableHasEnoughSeats),
         tableIsAvailable,
-        asyncErrorBoundary(changeStatus),
         asyncErrorBoundary(update, 400),
     ],
     delete: [
         asyncErrorBoundary(tableExists),
         tableIsOccupied,
-        asyncErrorBoundary(changeStatus),
         asyncErrorBoundary(update, 400),
     ],
 };

@@ -3,6 +3,9 @@ import { Route, Switch } from "react-router-dom";
 import Dashboard from "../dashboard/Dashboard";
 import CreateReservations from "./CreateReservation";
 import useQuery from "../utils/useQuery";
+import SeatReservation from "./SeatReservation";
+import EditReservation from "./EditReservation";
+import DisplayReservation from "./DisplayReservation";
 
 /**
  * Defines all the routes for the application.
@@ -12,7 +15,7 @@ import useQuery from "../utils/useQuery";
  * @returns {JSX.Element}
  */
 
-function Reservations() {
+function ReservationsRouter() {
   const query = useQuery();
   const date = query.get("date");
 
@@ -21,7 +24,15 @@ function Reservations() {
       <Route exact={true} path="/reservations/new">
         <CreateReservations />
       </Route>
-      <Route path="/reservations/:reservationId/seat"></Route>
+      <Route path="/reservations/:reservationId/seat">
+        <SeatReservation />
+      </Route>
+      <Route path="/reservations/:reservationId/edit">
+        <EditReservation />
+      </Route>
+      <Route path="/reservations/:reservationId">
+        <DisplayReservation />
+      </Route>
       <Route path="/reservations">
         <Dashboard date={date} />
       </Route>
@@ -29,4 +40,4 @@ function Reservations() {
   );
 }
 
-export default Reservations;
+export default ReservationsRouter;

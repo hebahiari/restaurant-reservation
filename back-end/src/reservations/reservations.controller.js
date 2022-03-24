@@ -23,7 +23,6 @@ async function create(req, res) {
 async function read(req, res) {
     const { reservation_id } = req.params;
     const data = await service.read(reservation_id);
-    console.log({ data });
     res.status(200).json({ data });
 }
 
@@ -54,17 +53,6 @@ function hasEnoughPeople(req, res, next) {
     next();
 }
 
-function peopleIsANumber(req, res, next) {
-    let { people } = req.body.data;
-    if (typeof people !== "number") {
-        next({
-            message: "people is not a number",
-            status: 400,
-        });
-    }
-    next();
-}
-
 function hasFutureWorkingDate(req, res, next) {
     const { reservation_date, reservation_time } = req.body.data;
     const reservationDate = new Date(
@@ -73,7 +61,6 @@ function hasFutureWorkingDate(req, res, next) {
     res.locals.time = reservationDate;
     const today = new Date();
 
-    console.log({ reservationDate });
     if (isNaN(reservationDate.getDate())) {
         next({
             message: `reservation_date / reservation_time incorrect`,
@@ -143,13 +130,14 @@ async function reservationExists(req, res, next) {
 
 async function changeStatus(req, res, next) {
     const reservation = res.locals.reservation;
-    const { status } = req.body.data;
+    const status = res.locals.status
     const data = await service.changeStatus(reservation.reservation_id, status);
     res.status(200).json({ data });
 }
 
 async function bodyHasValidStatus(req, res, next) {
     const { status } = req.body.data;
+    res.locals.status = status
     if (!status ||
         !(
             status == "booked" ||
@@ -204,7 +192,6 @@ module.exports = {
         hasFutureWorkingDate,
         hasEligibleTime,
         hasEnoughPeople,
-        peopleIsANumber,
         asyncErrorBoundary(update),
     ],
 };

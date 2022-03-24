@@ -93,7 +93,6 @@ function ReservationForm({ handleChange, handleSubmit, reservation, history }) {
         </label>
         <input
           type="number"
-          min="1"
           className="form-control"
           id="people"
           name="people"

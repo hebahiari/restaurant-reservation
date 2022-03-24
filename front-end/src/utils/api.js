@@ -148,7 +148,6 @@ export async function updateReservation(
     updatedReservation,
     signal
 ) {
-    console.log({ updatedReservation })
     const url = `${API_BASE_URL}/reservations/${reservation_id}`;
     const options = {
         method: "PUT",

@@ -15,12 +15,18 @@ function CreateTable() {
   const history = useHistory();
 
   const handleChange = (event) => {
-    setNewTable({ ...newTable, [event.target.name]: event.target.value });
+    setNewTable({
+      ...newTable,
+      [event.target.name]:
+        event.target.type === "number"
+          ? parseInt(event.target.value)
+          : event.target.value,
+    });
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    createNewTable(newTable)
+    createNewTable(newTable);
   };
 
   function createNewTable(newTable) {

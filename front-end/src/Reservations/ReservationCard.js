@@ -4,6 +4,8 @@ import { changeStatus } from "../utils/api";
 
 function ReservationCard({ reservation }) {
   let history = useHistory();
+
+  // destructuring the input
   const {
     first_name,
     last_name,
@@ -73,17 +75,17 @@ function ReservationCard({ reservation }) {
         <p className="card-text">Mobile number: {mobile_number} </p>
         <p className="card-text">
           Date/Time: {reservation_date}
-          {reservation_time}{" "}
+          {reservation_time}
         </p>
         <p
           className="card-text"
           data-reservation-id-status={reservation.reservation_id}
         >
-          Status: {status}{" "}
+          Status: {status}
         </p>
         {status === "booked" ? seatButton : null}
         {status === "booked" ? editButton : null}
-        {cancelButton}
+        {status === "booked" ? cancelButton : null}
       </div>
     </div>
   );

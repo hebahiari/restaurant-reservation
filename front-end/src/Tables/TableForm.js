@@ -26,6 +26,7 @@ return(
             className="form-control"
             id="capacity"
             name="capacity"
+            type="number"
             required
             onChange={handleChange}
             value={newTable.capacity}

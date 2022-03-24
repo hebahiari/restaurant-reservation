@@ -5,6 +5,8 @@ import ReservationForm from "./ReservationForm";
 import ErrorAlert from "../layout/ErrorAlert";
 
 function CreateReservation() {
+
+  //reservation template
   const emptyReservation = {
     first_name: "",
     last_name: "",
@@ -18,18 +20,22 @@ function CreateReservation() {
   const [newReservationsError, setNewReservationsError] = useState(null);
   const history = useHistory();
 
+  //controlling the component
   const handleChange = (event) => {
     setReservation({
       ...reservation,
-      [event.target.name]: event.target.value,
+      [event.target.name]: event.target.type === "number" ? parseInt(event.target.value) : event.target.value
     });
   };
 
+  //creating the reservation after clicking submit
   const handleSubmit = (event) => {
     event.preventDefault();
     createNewReservation(reservation);
   };
 
+
+  //sending the api call and clearing the form 
   function createNewReservation(reservation) {
     const abortController = new AbortController();
     setNewReservationsError(null);

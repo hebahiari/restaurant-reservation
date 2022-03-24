@@ -18,6 +18,7 @@ function Dashboard({ date }) {
   const [reservationsError, setReservationsError] = useState(null);
   const [tablesError, setTablesError] = useState(null);
 
+  // getting the selected date from the url
   const query = useQuery();
   if (query.get("date")) {
     date = query.get("date");
@@ -25,13 +26,18 @@ function Dashboard({ date }) {
 
   useEffect(loadDashboard, [date]);
 
+  // sending api calls to list the reservations and tables
   function loadDashboard() {
     const abortController = new AbortController();
     setReservationsError(null);
     listReservations({ date }, abortController.signal)
       .then(setReservations)
       .catch(setReservationsError);
-    listTables(abortController.signal).then(setTables).catch(setTablesError);
+
+      ///is this ok?
+    listTables(abortController.signal)
+      .then(setTables)
+      .catch(setTablesError);
     return () => abortController.abort();
   }
 

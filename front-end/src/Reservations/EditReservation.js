@@ -9,6 +9,7 @@ function EditReservation() {
   const { reservationId } = useParams();
   const history = useHistory();
 
+  //reservation template
   const defaultReservation = {
     first_name: "hi",
     last_name: "",
@@ -22,18 +23,20 @@ function EditReservation() {
   const [reservation, setReservation] =
     useState(defaultReservation);
 
-  const [updateError, setUpdateError] = useState();
+  const [updateError, setUpdateError] = useState(null);
+  const [ getReservationError , setGetReservationError ] = useState(null)
 
   //loading the current reservations' data
   useEffect(() => {
     const abortController = new AbortController();
-    setUpdateError(null);
+    setGetReservationError(null);
     getReservation(reservationId, abortController.signal)
     .then(setReservation)
-    .catch(setUpdateError);
+    .catch(setGetReservationError);
     return () => abortController.abort();
   }, [reservationId]);
 
+  //controlling the component
   const handleChange = (event) => {
     setReservation({
       ...reservation,
@@ -41,6 +44,8 @@ function EditReservation() {
     });
   };
 
+  //sending an API call to update the reservation 
+  //when clicking submit
   const handleSubmit = (event) => {
     event.preventDefault();
     updateReservation(reservationId, reservation)
@@ -57,7 +62,8 @@ function EditReservation() {
         reservation={reservation}
         history={history}
       />
-      {/* <ErrorAlert error={updateError} /> */}
+      <ErrorAlert error={updateError} />
+      <ErrorAlert error={getReservationError} />
     </div>
   );
 }
