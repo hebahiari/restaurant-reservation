@@ -33,7 +33,7 @@ function SeatReservation() {
   const handleConfirmButton = (event) => {
     event.preventDefault();
     seatReservation(selectedTableId, reservationId)
-      .then(() => changeStatus(reservationId, "seated"))
+      // .then(() => changeStatus(reservationId, "seated"))
       .then(() => history.push("/"))
       .catch(setTablesError);
   };

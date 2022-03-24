@@ -12,6 +12,7 @@ const [ getReservationError, setGetReservationError ] = useState();
 
 //retrieving the reservation from the database
 useEffect(() => {
+    debugger
     getReservation(reservationId)
     .then(setReservation)
     .catch(setGetReservationError)
@@ -20,7 +21,7 @@ useEffect(() => {
   return (
       <div>
       {reservation ? <ReservationCard reservation={reservation} /> : null }
-      <ErrorAlert error={getReservationError} />
+      {/* <ErrorAlert error={getReservationError} /> */}
 </div>  
 );
 }

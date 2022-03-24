@@ -122,17 +122,17 @@ async function tableIsOccupied(req, res, next) {
     next();
 }
 
-// async function changeStatus(req, res, next) {
-//     if (req.method == "DELETE") {
-//         let table = res.locals.table;
-//         const { reservation_id } = table;
-//         const data = await service.changeStatus(reservation_id, "finished");
-//     } else {
-//         let reservation_id = res.locals.reservation_id;
-//         const data = await service.changeStatus(reservation_id, "seated");
-//     }
-//     next();
-// }
+async function changeStatus(req, res, next) {
+    if (req.method == "DELETE") {
+        let table = res.locals.table;
+        const { reservation_id } = table;
+        const data = await service.changeStatus(reservation_id, "finished");
+    } else {
+        let reservation_id = res.locals.reservation_id;
+        const data = await service.changeStatus(reservation_id, "seated");
+    }
+    next();
+}
 
 async function reservationIsBooked(req, res, next) {
     let reservation = res.locals.reservation;
@@ -158,11 +158,13 @@ module.exports = {
         reservationIsBooked,
         asyncErrorBoundary(tableHasEnoughSeats),
         tableIsAvailable,
+        asyncErrorBoundary(changeStatus, 400),
         asyncErrorBoundary(update, 400),
     ],
     delete: [
         asyncErrorBoundary(tableExists),
         tableIsOccupied,
+        asyncErrorBoundary(changeStatus, 400),
         asyncErrorBoundary(update, 400),
     ],
 };

@@ -23,6 +23,8 @@ async function create(req, res) {
 async function read(req, res) {
     const { reservation_id } = req.params;
     const data = await service.read(reservation_id);
+    data.reservation_date = data.reservation_date.toISOString().split('T')[0]
+    data.reservation_time = data.reservation_time.slice(0, 5)
     res.status(200).json({ data });
 }
 

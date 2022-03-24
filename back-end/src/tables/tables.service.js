@@ -30,12 +30,12 @@ function getReservation(reservation_id) {
         .first();
 }
 
-// function changeStatus(reservation_id, newStatus) {
-//     return knex("reservations")
-//         .select("*")
-//         .where({ reservation_id: reservation_id })
-//         .update({ status: newStatus });
-// }
+function changeStatus(reservation_id, newStatus) {
+    return knex("reservations")
+        .select("*")
+        .where({ reservation_id: reservation_id })
+        .update({ status: newStatus });
+}
 
 module.exports = {
     list,
@@ -43,5 +43,5 @@ module.exports = {
     update,
     getTable,
     getReservation,
-    // changeStatus,
+    changeStatus,
 };

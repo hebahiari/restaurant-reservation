@@ -4,6 +4,8 @@ import React, { useState, useEffect } from "react";
 import ReservationForm from "./ReservationForm";
 import ErrorAlert from "../layout/ErrorAlert";
 import { useParams } from "react-router";
+import formatReservationDate from "../utils/format-reservation-date";
+import formatReservationTime from "../utils/format-reservation-time";
 
 function EditReservation() {
   const { reservationId } = useParams();
@@ -11,7 +13,7 @@ function EditReservation() {
 
   //reservation template
   const defaultReservation = {
-    first_name: "hi",
+    first_name: "",
     last_name: "",
     mobile_number: "",
     reservation_date: "",
@@ -20,19 +22,19 @@ function EditReservation() {
     reservation_id: reservationId,
   };
 
-  const [reservation, setReservation] =
-    useState(defaultReservation);
+  const [reservation, setReservation] = useState(defaultReservation);
 
   const [updateError, setUpdateError] = useState(null);
-  const [ getReservationError , setGetReservationError ] = useState(null)
+  const [getReservationError, setGetReservationError] = useState(null);
 
-  //loading the current reservations' data
+  //loading the selected reservations' data
   useEffect(() => {
     const abortController = new AbortController();
     setGetReservationError(null);
     getReservation(reservationId, abortController.signal)
-    .then(setReservation)
-    .catch(setGetReservationError);
+      .then(setReservation)
+      .catch(setGetReservationError);
+    // debugger
     return () => abortController.abort();
   }, [reservationId]);
 
@@ -44,12 +46,13 @@ function EditReservation() {
     });
   };
 
-  //sending an API call to update the reservation 
+  //sending an API call to update the reservation
   //when clicking submit
   const handleSubmit = (event) => {
     event.preventDefault();
     updateReservation(reservationId, reservation)
-      .then(() => history.push(`/reservations/${reservationId}`))
+      // .then(() => history.push(`/reservations/${reservationId}`))
+      .then(() => history.push(`/dashboard?date=${reservation.reservation_date}`))
       .catch(setUpdateError);
   };
 

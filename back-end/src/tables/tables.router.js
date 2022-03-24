@@ -7,6 +7,7 @@
 const router = require("express").Router();
 const controller = require("./tables.controller");
 const methodNotAllowed = require("../errors/methodNotAllowed");
+const reservationsController = require("../reservations/reservations.controller");
 
 router
     .route("/:tableId/seat")

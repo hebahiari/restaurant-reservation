@@ -13,7 +13,7 @@ function handleFinishButton() {
       window.confirm("Is this table ready to seat new guests? This cannot be undone.")
     ) {
       unreserveTable(table.table_id)
-      .then(() => changeStatus(reservation_id, "finished"))
+      // .then(() => changeStatus(reservation_id, "finished"))
       .then(() => history.push("/"));
     }
 }
