@@ -1,6 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router";
-import { changeStatus, unreserveTable } from "../utils/api"
+import { unreserveTable } from "../utils/api"
 
 function TableCard({table}) {
 

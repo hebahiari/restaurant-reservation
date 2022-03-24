@@ -62,7 +62,6 @@ function hasFutureWorkingDate(req, res, next) {
     );
     res.locals.time = reservationDate;
     const today = new Date();
-
     if (isNaN(reservationDate.getDate())) {
         next({
             message: `reservation_date / reservation_time incorrect`,

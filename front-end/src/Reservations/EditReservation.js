@@ -4,8 +4,6 @@ import React, { useState, useEffect } from "react";
 import ReservationForm from "./ReservationForm";
 import ErrorAlert from "../layout/ErrorAlert";
 import { useParams } from "react-router";
-import formatReservationDate from "../utils/format-reservation-date";
-import formatReservationTime from "../utils/format-reservation-time";
 
 function EditReservation() {
   const { reservationId } = useParams();
@@ -34,7 +32,6 @@ function EditReservation() {
     getReservation(reservationId, abortController.signal)
       .then(setReservation)
       .catch(setGetReservationError);
-    // debugger
     return () => abortController.abort();
   }, [reservationId]);
 

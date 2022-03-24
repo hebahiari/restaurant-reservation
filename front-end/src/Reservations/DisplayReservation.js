@@ -8,11 +8,10 @@ function DisplayReservation() {
 
 const { reservationId } = useParams();
 const [ reservation, setReservation] = useState(null)
-const [ getReservationError, setGetReservationError ] = useState();
+const [ getReservationError, setGetReservationError ] = useState(null);
 
 //retrieving the reservation from the database
 useEffect(() => {
-    debugger
     getReservation(reservationId)
     .then(setReservation)
     .catch(setGetReservationError)
@@ -21,7 +20,7 @@ useEffect(() => {
   return (
       <div>
       {reservation ? <ReservationCard reservation={reservation} /> : null }
-      {/* <ErrorAlert error={getReservationError} /> */}
+      <ErrorAlert error={getReservationError} />
 </div>  
 );
 }
