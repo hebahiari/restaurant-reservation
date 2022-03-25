@@ -20,7 +20,7 @@ function ReservationCard({ reservation }) {
   const seatButton = (
     <button
       type="button"
-      className="btn btn-light m-1"
+      className="btn btn-success px-4"
       href={`/reservations/${reservation.reservation_id}/seat`}
       onClick={() =>
         history.push(`/reservations/${reservation.reservation_id}/seat`)
@@ -33,7 +33,7 @@ function ReservationCard({ reservation }) {
   const editButton = (
     <button
       type="button"
-      className="btn btn-success m-1"
+      className="btn btn-light m-1 px-4"
       href={`/reservations/${reservation.reservation_id}/edit`}
       onClick={() =>
         history.push(`/reservations/${reservation.reservation_id}/edit`)
@@ -56,7 +56,7 @@ function ReservationCard({ reservation }) {
   const cancelButton = (
     <button
       type="button"
-      className="btn btn-secondary m-1"
+      className="btn btn-secondary m-1 px-4"
       data-reservation-id-cancel={reservation.reservation_id}
       onClick={handleCancelButton}
     >
@@ -84,10 +84,9 @@ function ReservationCard({ reservation }) {
           Status: {status}
         </p>
         <div className="container m-0 p-0">
-        <div className="row pt-3" >
-          <div className="d-grid col-4 m-0 p-0" > {status === "booked" ? seatButton : null}  </div>
-          <div className="d-grid col-4 m-0 p-0" > {status === "booked" ? editButton : null}  </div>
-          <div className="d-grid col-4 m-0 p-0" > {status === "booked" ? cancelButton : null}  </div>
+        <div className="row pt-3 justify-content-between" >
+          <div className="col-9" > {status === "booked" ? seatButton : null} {status === "booked" ? editButton : null}   </div>
+          <div className="col-3" > {status === "booked" ? cancelButton : null}  </div>
           </div>
         </div>
       </div>
