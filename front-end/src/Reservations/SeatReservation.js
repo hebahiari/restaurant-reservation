@@ -39,16 +39,17 @@ function SeatReservation() {
   };
 
   return (
-    <fieldset className="card">
+    <fieldset className="card bg-dark col-md-8 p-4 mb-3 text-center" style={{ backgroundColor: "#1f424b", borderRadius: "1.25rem" }}>
       <legend>Select Table</legend>
       <div>
-        <label htmlFor="table">Type: </label>
         <select
           id="table"
           name="table_id"
           required={true}
           onChange={handleTableChange}
           value={selectedTableId}
+          className="form-select" 
+          multiple aria-label="size 5 select example"
         >
           <option value="" selected disabled hidden>
             Choose here
@@ -62,7 +63,7 @@ function SeatReservation() {
         <br />
         <button
           type="submit"
-          className="btn btn-secondary m-1"
+          className="btn btn-success m-1"
           onClick={handleConfirmButton}
         >
           Confirm

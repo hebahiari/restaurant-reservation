@@ -13,19 +13,21 @@ import "./Layout.css";
  */
 function Layout() {
   return (
-    <div className="container">
-      <div className="row-12">
-        <div className="row-md-2" style={{ backgroundColor: "#1f424b" }}>
-          <Menu />
-        </div>
-        <h1
-          className="m3 text-center header-logo"
-          style={{ fontFamily: "'Seven Day Signature', sans-serif" }}
-        >
-          Periodic Tables
-        </h1>
-        <div className="row gx-3 justify-content-center align-items-start">
-          <Routes />
+    <div>
+      <div className="row-md-2" style={{ backgroundColor: "#1f424b" }}>
+        <Menu />
+      </div>
+      <div className="container">
+        <div className="row-12">
+          <h1
+            className="m3 text-center header-logo"
+            style={{ fontFamily: "'Seven Day Signature', sans-serif" }}
+          >
+            Periodic Tables
+          </h1>
+          <div className="row gx-5 justify-content-center align-items-start">
+            <Routes />
+          </div>
         </div>
       </div>
     </div>

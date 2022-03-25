@@ -47,10 +47,9 @@ function Dashboard({ date }) {
 
   return (
     <>
-      <div className="col-lg-6 col-xs-12 align-self-start shadow">
+      <div className="col-lg-6 col-xs-12 align-self-start bg-dark m-2" style={{ backgroundColor: "#1f424b", borderRadius: "1.25rem" }}>
         <div
-          className="text-center card"
-          style={{ backgroundColor: "#1f424b", borderRadius: "1.25rem" }}
+          className="text-center"
         >
           <div>
             <h2>Reservations</h2>
@@ -90,10 +89,9 @@ function Dashboard({ date }) {
           </div>
         </div>
       </div>
-      <div className="col-lg-3 col-xs-12 align-self-start shadow-sm">
+      <div className="col-lg-3 col-xs-12 align-self-start bg-dark m-2" style={{ backgroundColor: "#1f424b", borderRadius: "1.25rem" }}>
         <div
-          className="text-center card"
-          style={{ backgroundColor: "#1f424b", borderRadius: "1.25rem" }}
+          className="text-center"
         >
           <div className="row">
             <div className=".col-md-6 .offset-md-3">

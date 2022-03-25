@@ -49,7 +49,7 @@ function CreateReservation() {
   }
 
   return (
-    <div className="card bg-dark col-md-8 p-3" style={{ backgroundColor: "#1f424b", borderRadius: "1.25rem" }}>
+    <div className="card bg-dark col-md-8 p-4" style={{ backgroundColor: "#1f424b", borderRadius: "1.25rem" }}>
       <h1>Create New Reservation</h1>
       <ReservationForm
         handleSubmit={handleSubmit}
