@@ -79,9 +79,9 @@ Periodic Tables is a restaurant reservation system desgined to be used by a rest
 {
     data: {
         reservation_id: 5,
-        first_name: "Anthony",
-        last_name: "Charboneau",
-        mobile_number: "620-646-8897",
+        first_name: "Angelina",
+        last_name: "Jolie",
+        mobile_number: "650-646-8897",
         reservation_date: "2026-12-30",
         reservation_time: "18:00:00",
         people: 2,
