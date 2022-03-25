@@ -31,18 +31,22 @@ function Search() {
   );
 
   const loadingSpinner = (
-    <div className="card-main col-12 p-4 mb-3">
+    <div className="row  justify-content-center ">
+    <div className="card-main col-6 p-4 mb-3 justify-content-center">
     <div className="d-flex justify-content-center p-5 m-5">
       <div className="spinner-border" role="status">
         <span className="visually-hidden">Loading...</span>
       </div>
     </div>
     </div>
+    </div>
   );
 
   return (
     <>
-      <div className="card-main col-12 p-4 mb-3">
+    <div className="container">
+      <div className="row justify-content-center">
+      <div className="card-main col-6 pb-4 mb-3">
         <form className="mx-3" onSubmit={handleSubmit}>
           <h2 className="mb-3">Search</h2>
           <div className="mb-3">
@@ -63,16 +67,20 @@ function Search() {
         </form>
         <ErrorAlert error={searchError} />
       </div>
+      </div>
       {loading? loadingSpinner : null}
       {displayResult ? (
         found.length ? (
-          <div className="card-main col-12 p-4 mb-3">
+          <div className="row  justify-content-center ">
+          <div className="card-main col-6 p-4 mb-3">
             <ListReservations reservations={found} />
+          </div>
           </div>
         ) : (
           noReservationsFound
         )
       ) : null}
+      </div>
     </>
   );
 }
