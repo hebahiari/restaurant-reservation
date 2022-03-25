@@ -22,7 +22,6 @@ Periodic Tables is a restaurant reservation system desgined to be used by a rest
         * Validates all inputs for proper formatting
     * When the user attempts to seat a reservation at a table, the application will make sure that the selected table has proper capacity for the reservation
     * Unoccupied tables cannot be cleared
-***
 
 ## Installation
 1. Go to the project root
@@ -31,7 +30,6 @@ Periodic Tables is a restaurant reservation system desgined to be used by a rest
 4. Start tests with `npm run test`
 5. Start frontend/backend tests with `npm run test:frontend or npm run test:backend`
 6. Start individual tests for each user stories with `npm run test:1:frontend` replace 1 with the desired user story or replace frontend with backend
-***
 
 ## Technology
 ### <u>Client</u>
@@ -43,7 +41,6 @@ Periodic Tables is a restaurant reservation system desgined to be used by a rest
 * Utilizes [Knex](https://knexjs.org/) for PostgreSQL query building
 ### <u>Database</u>
 * Hosted by ElphantSQL
-***
 
 # Screenshots
 
@@ -61,7 +58,6 @@ Periodic Tables is a restaurant reservation system desgined to be used by a rest
 
 ## Seat Reservation
 ![seat-reservation](/images/SeatReservation.PNG)
-***
 
 ## Documentation for API 
 | Route                                | Description                                        | Methods |
