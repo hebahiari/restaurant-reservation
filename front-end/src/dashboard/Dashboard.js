@@ -47,7 +47,7 @@ function Dashboard({ date }) {
 
   return (
     <>
-      <div className="col-lg-6 col-xs-12 align-self-start">
+      <div className="col-lg-6 col-xs-12 align-self-start shadow">
         <div
           className="text-center card"
           style={{ backgroundColor: "#1f424b", borderRadius: "1.25rem" }}
@@ -61,7 +61,7 @@ function Dashboard({ date }) {
             </Link>
 
             <h6>Date: {date ? date : todaysDate}</h6>
-            <div>
+            <div className="mb-3">
               <button
                 className="btn btn-secondary m-1"
                 onClick={() =>
@@ -90,16 +90,16 @@ function Dashboard({ date }) {
           </div>
         </div>
       </div>
-      <div className="col-lg-3 col-xs-12 align-self-start">
+      <div className="col-lg-3 col-xs-12 align-self-start shadow-sm">
         <div
           className="text-center card"
           style={{ backgroundColor: "#1f424b", borderRadius: "1.25rem" }}
         >
           <div className="row">
-            <div className="col align-self-center">
+            <div className=".col-md-6 .offset-md-3">
               <h2>Tables</h2>
             </div>
-            <div className="col  align-self-end">
+            <div className=".col-md-3 .offset-md-3">
               <Link className="nav-link" to="/tables/new">
                 <span className="oi oi-plus" />
                 &nbsp;

@@ -39,7 +39,7 @@ function SeatReservation() {
   };
 
   return (
-    <fieldset>
+    <fieldset className="card">
       <legend>Select Table</legend>
       <div>
         <label htmlFor="table">Type: </label>
@@ -59,6 +59,7 @@ function SeatReservation() {
             </option>
           ))}
         </select>
+        <br />
         <button
           type="submit"
           className="btn btn-secondary m-1"

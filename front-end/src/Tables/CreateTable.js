@@ -40,7 +40,7 @@ function CreateTable() {
   }
 
   return (
-    <div className="card bg-dark col-md-8 my-3">
+    <div className="card bg-dark col-md-8 p-3" style={{ backgroundColor: "#1f424b", borderRadius: "1.25rem" }}>
       <h1>Create New Table</h1>
       <TableForm
         handleSubmit={handleSubmit}

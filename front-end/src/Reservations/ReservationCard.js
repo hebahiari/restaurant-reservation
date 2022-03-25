@@ -71,11 +71,11 @@ function ReservationCard({ reservation }) {
         <p className="card-text">
           Name: {first_name} {last_name}
         </p>
-        <p className="card-text">Number Of People: {people} </p>
+        <p className="card-text">People: {people} </p>
         <p className="card-text">Mobile number: {mobile_number} </p>
         <p className="card-text">
-          Date/Time: {reservation_date}
-          {reservation_time}
+          Date/Time: {reservation_date.slice(0,10)} / 
+          {reservation_time.slice(0,5)}
         </p>
         <p
           className="card-text"

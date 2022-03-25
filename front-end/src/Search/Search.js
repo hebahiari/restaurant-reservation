@@ -29,8 +29,8 @@ function Search() {
   );
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className="card bg-dark col-md-8 p-3 mb-3" style={{ backgroundColor: "#1f424b", borderRadius: "1.25rem" }}>
+      <form  onSubmit={handleSubmit}>
         <h2>Search</h2>
         <div className="mb-3">
           <input
@@ -49,13 +49,17 @@ function Search() {
         </button>
       </form>
       <ErrorAlert error={searchError} />
+  
+      
       {displayResult ? (
-        found.length ? (
+        found.length ? (<div className="card bg-dark col-md-8 p-3" style={{ backgroundColor: "#1f424b", borderRadius: "1.25rem" }}>
           <ListReservations reservations={found} />
+          </div>
         ) : (
           noReservationsFound
         )
       ) : null}
+      
     </div>
   );
 }
