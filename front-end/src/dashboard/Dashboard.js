@@ -47,7 +47,7 @@ function Dashboard({ date }) {
 
   return (
     <>
-      <div className="col-lg-6 col-xs-12 align-self-start bg-dark m-2" style={{ backgroundColor: "#1f424b", borderRadius: "1.25rem" }}>
+      <div className="col-md-7 col-xs-10 align-self-start bg-dark m-2 card-main" style={{ maxWidth: "630px" }}>
         <div
           className="text-center"
         >
@@ -59,7 +59,7 @@ function Dashboard({ date }) {
               &nbsp;
             </Link>
 
-            <h6>Date: {date ? date : todaysDate}</h6>
+            <h6 className="my-2">Date: {date ? date : todaysDate}</h6>
             <div className="mb-3">
               <button
                 className="btn btn-secondary m-1"
@@ -89,7 +89,7 @@ function Dashboard({ date }) {
           </div>
         </div>
       </div>
-      <div className="col-lg-3 col-xs-12 align-self-start bg-dark m-2" style={{ backgroundColor: "#1f424b", borderRadius: "1.25rem" }}>
+      <div className="col-md-4 col-xs-10 align-self-start bg-dark m-2 card-main" style={{ maxWidth: "300px" }}>
         <div
           className="text-center"
         >

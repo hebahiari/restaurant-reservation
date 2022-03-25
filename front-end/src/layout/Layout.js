@@ -1,6 +1,7 @@
 import React from "react";
 import Menu from "./Menu";
 import Routes from "./Routes";
+import { useHistory } from "react-router";
 
 import "./Layout.css";
 
@@ -12,6 +13,7 @@ import "./Layout.css";
  * @returns {JSX.Element}
  */
 function Layout() {
+  const history = useHistory();
   return (
     <div>
       <div className="row-md-2" style={{ backgroundColor: "#1f424b" }}>
@@ -19,13 +21,11 @@ function Layout() {
       </div>
       <div className="container">
         <div className="row-12">
-          <h1
-            className="text-center header-logo"
-          >
-            Periodic Tables
-          </h1>
-          {/* <p text-right>the ultimate restaurant reservation system</p> */}
-          <div className="row gx-5 justify-content-center align-items-start">
+          <div className="center-text" onClick={() => history.push("/")}>
+          <h1 className="text-center header-logo">Periodic Tables</h1>
+          {/* <h6 text-center>the ultimate restaurant reservation system</h6> */}
+          </div>
+          <div className="row gx-5 justify-content-center align-items-start p-4">
             <Routes />
           </div>
         </div>

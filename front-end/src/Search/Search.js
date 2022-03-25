@@ -29,9 +29,10 @@ function Search() {
   );
 
   return (
-    <div className="card card-main bg-dark col-md-8 p-4 mb-3 text-center">
-      <form  onSubmit={handleSubmit}>
-        <h2 className="pb-2">Search</h2>
+    <>
+    <div className="card card-main bg-dark col-md-8 p-4 mb-3">
+      <form  className="mx-3" onSubmit={handleSubmit}>
+        <h2 className="mb-3">Search</h2>
         <div className="mb-3">
           <input
             className="form-control"
@@ -51,16 +52,16 @@ function Search() {
       <ErrorAlert error={searchError} />
   
       
+    </div>
       {displayResult ? (
-        found.length ? (<div className="card bg-dark col-md-8 p-3" style={{ backgroundColor: "#1f424b", borderRadius: "1.25rem" }}>
+        found.length ? (<div className="card card-main bg-dark col-md-8 p-4 mb-3">
           <ListReservations reservations={found} />
           </div>
         ) : (
           noReservationsFound
         )
       ) : null}
-      
-    </div>
+      </>
   );
 }
 

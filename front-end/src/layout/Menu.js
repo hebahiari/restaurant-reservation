@@ -20,7 +20,7 @@ function Menu() {
         <ul className="nav justify-content-center" id="accordionSidebar">
           <li className="nav-item">
             <Link className="nav-link" to="/dashboard">
-              <span className="oi oi-dashboard" />
+              <span className="oi oi-home" />
               &nbsp;Dashboard
             </Link>
           </li>
@@ -38,7 +38,7 @@ function Menu() {
           </li>
           <li className="nav-item">
             <Link className="nav-link" to="/tables/new">
-              <span className="oi oi-layers" />
+              <span className="oi oi-plus" />
               &nbsp;New Table
             </Link>
           </li>
