@@ -31,6 +31,7 @@ Periodic Tables is a restaurant reservation system desgined to be used by a rest
 4. Start tests with `npm run test`
 5. Start frontend/backend tests with `npm run test:frontend or npm run test:backend`
 6. Start individual tests for each user stories with `npm run test:1:frontend` replace 1 with the desired user story or replace frontend with backend
+***
 
 ## Technology
 ### <u>Client</u>
@@ -60,7 +61,7 @@ Periodic Tables is a restaurant reservation system desgined to be used by a rest
 
 ## Seat Reservation
 ![seat-reservation](/images/SeatReservation.PNG)
-
+***
 
 ## Documentation for API 
 | Route                                | Description                                        | Methods |
