@@ -1,7 +1,7 @@
 # Capstone: Restaurant Reservation System
 
 ## Live application URL
-``
+`https://restaurant-reservations-sys.herokuapp.com/dashboard`
 
 ## Technology Used
 ### Frontend
