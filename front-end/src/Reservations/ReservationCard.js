@@ -20,7 +20,7 @@ function ReservationCard({ reservation }) {
   const seatButton = (
     <button
       type="button"
-      className="btn btn-success px-4"
+      className="btn btn-success px-3"
       href={`/reservations/${reservation.reservation_id}/seat`}
       onClick={() =>
         history.push(`/reservations/${reservation.reservation_id}/seat`)
@@ -33,7 +33,7 @@ function ReservationCard({ reservation }) {
   const editButton = (
     <button
       type="button"
-      className="btn btn-light m-1 px-4"
+      className="btn btn-light m-1 px-3"
       href={`/reservations/${reservation.reservation_id}/edit`}
       onClick={() =>
         history.push(`/reservations/${reservation.reservation_id}/edit`)
@@ -56,7 +56,7 @@ function ReservationCard({ reservation }) {
   const cancelButton = (
     <button
       type="button"
-      className="btn btn-secondary m-1 px-4"
+      className="btn btn-secondary m-1 px-3"
       data-reservation-id-cancel={reservation.reservation_id}
       onClick={handleCancelButton}
     >
@@ -74,8 +74,8 @@ function ReservationCard({ reservation }) {
         <p className="card-text">People: {people} </p>
         <p className="card-text">Mobile number: {mobile_number} </p>
         <p className="card-text">
-          Date/Time: {reservation_date.slice(0,10)} / 
-          {reservation_time.slice(0,5)}
+          Date/Time: {reservation_date.slice(0, 10)} /
+          {reservation_time.slice(0, 5)}
         </p>
         <p
           className="card-text"
@@ -83,10 +83,18 @@ function ReservationCard({ reservation }) {
         >
           Status: {status}
         </p>
-        <div className="container m-0 p-0">
-        <div className="row pt-3 justify-content-between" >
-          <div className="col-9" > {status === "booked" ? seatButton : null} {status === "booked" ? editButton : null}   </div>
-          <div className="col-3" > {status === "booked" ? cancelButton : null}  </div>
+
+        <div class="container p-0">
+          <div className="row pt-3 justify-content-between">
+            <div className="col p-0">
+              {" "}
+              {status === "booked" ? seatButton : null}{" "}
+              {status === "booked" ? editButton : null}{" "}
+            </div>
+            <div className="col-auto p-0">
+              {" "}
+              {status === "booked" ? cancelButton : null}{" "}
+            </div>
           </div>
         </div>
       </div>

@@ -44,3 +44,9 @@ html {
 .card-text {
     color: rgb(231, 224, 224);
 }
+
+.plus-button {
+    right: 10px;
+    position: absolute;
+    top: 10px;
+}

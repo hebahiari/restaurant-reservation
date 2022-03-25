@@ -47,17 +47,20 @@ function Dashboard({ date }) {
 
   return (
     <>
-      <div className="col-md-7 col-xs-10 align-self-start bg-dark m-2 card-main" style={{ maxWidth: "630px" }}>
-        <div
-          className="text-center"
-        >
+      <div className="col-lg-5 col-md-7 col-xs-6 col-sm-12 align-self-start bg-dark m-2 card-main">
+        <div className="text-center">
           <div>
-            <h2>Reservations</h2>
-
-            <Link className="nav-link align-self-end" to="/reservations/new">
-              <span className="oi oi-plus" />
-              &nbsp;
-            </Link>
+              <div className="row p-0 justify-content-center">
+                <div className="col-auto p-1">
+                  <h2>Reservations</h2>
+                </div>
+                <div className="col-auto plus-button p-1">
+                  <Link className="nav-link " to="/reservations/new">
+                    <span className="oi oi-plus" />
+                    &nbsp;
+                  </Link>
+                </div>
+              </div>
 
             <h6 className="my-2">Date: {date ? date : todaysDate}</h6>
             <div className="mb-3">
@@ -89,15 +92,13 @@ function Dashboard({ date }) {
           </div>
         </div>
       </div>
-      <div className="col-md-4 col-xs-10 align-self-start bg-dark m-2 card-main" style={{ maxWidth: "300px" }}>
-        <div
-          className="text-center"
-        >
-          <div className="row">
-            <div className=".col-md-6 .offset-md-3">
+      <div className="col-lg-3 col-md-4 col-xs-6 col-sm-12 align-self-start bg-dark m-2 card-main">
+        <div className="text-center">
+          <div className="row justify-content-center">
+            <div className="col-auto p-1">
               <h2>Tables</h2>
             </div>
-            <div className=".col-md-3 .offset-md-3">
+            <div className="col-auto plus-button p-1">
               <Link className="nav-link" to="/tables/new">
                 <span className="oi oi-plus" />
                 &nbsp;
