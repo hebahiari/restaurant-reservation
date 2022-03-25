@@ -7,7 +7,7 @@
 ### Frontend
 - ReactJS
 - CSS
-- JSX
+- Bootstrap
 
 ### Backend
 - Postgres (knex)
@@ -75,7 +75,7 @@ Expanding the restaurant? Create new tables by selecting the 'New Table' option 
     | ---------- | ---------- |
     | `first_name` | `str` |
     | `last_name` | `str` |
-    | `party` | `int` |
+    | `people` | `int` |
     | `reservation_date` | `date` |
     | `reservation_time` | `str` |
     | `mobile_number` | `str` |
@@ -103,7 +103,7 @@ Returns reservations for a particular date
     | ---------- | ---------- |
     | `first_name` | `str` |
     | `last_name` | `str` |
-    | `party` | `int` |
+    | `people` | `int` |
     | `reservation_date` | `date` |
     | `reservation_time` | `str` |
     | `mobile_number` | `str` |
