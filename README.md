@@ -1,161 +1,87 @@
-# Capstone: Restaurant Reservation System
+## Links
+* Deployed App: [Periodic Tables](https://restaurant-reservations-sys.herokuapp.com/)
 
-## Live application URL
-
-[Live Application](https://restaurant-reservations-sys.herokuapp.com/dashboard)
-`https://restaurant-reservations-sys.herokuapp.com/dashboard`
-
-## Technology Used
-### Frontend
-- ReactJS
-- CSS
-- Bootstrap
-
-### Backend
-- Postgres (knex)
-- NodeJS
-- Express
-
-<br>
+## Installation
+1. Go to the project root
+2. Run `npm install` to install dependencies
+3. Start project on development server with `npm run start:dev`
+4. Start tests with `npm run test`
+5. Start frontend/backend tests with `npm run test:frontend or npm run test:backend`
+6. Start individual tests for each user stories with `npm run test:1:frontend` replace 1 with the desired user story or replace frontend with backend
 
 ## Summary
-Periodic Tables is a restaurant schedule management application that allows a restaurant manager to create/document tables and reservations. It provides the ability to filter reservations by phone number, sort reservations by those that are booked, seated, and completed.
+Built a full-stack web app for use as an internal tool to manage restaurant reservations.
 
-Users can also create tables and assign capacity to reflect the tables in the restaurant.
+Has the following features:
+* users can create, edit, or cancel a reservation
+* users can create a table
+* users can seat reservations to a table
+* users can finish a table
+* users can search for reservations by phone numbers 
 
-<br>
+## Stack
+* React
+* Bootstrap
+* Node
+* Express
+* PostgreSQL
+* Knex.js
 
-## Installation Instructions
+## Dashboard
+![dashboard](/images/Dashboard.PNG)
 
-### Frontend
-- `cd` into `Thinkful-Final-Capstone/front-end`
-  - run `npm install`
-  - run `npm start` to start the application
+## New Reservation
+![new-reservation](/images/NewReservation.PNG)
 
-### Backend
-- `cd` into `Thinkful-Final-Capstone/back-end`
-  - run `npm install`
-  - run `knex migrate:latest` and `knex seed:run`
-  - run `npm start` to start the application
+## Search By Phone Number
+![search-phone](/images/SearchPhone.PNG)
 
-<br>
+## New Table
+![new-table](/images/NewTable.PNG)
 
-# Features
-
-## Creating A Reservation
-Creating a reservations is done by clicking 'New Reservation' on the navigation bar. This requires the customer's first name, last name, reservation date, reservation time, quantity of guests, and phone number.
-
-![newReservation](https://github.com/.png)
-
-
-## Managing Reservations
-Managing reservations can be done via the dashboard.
-
-The dashboard by default will list the reservations for today. Use the previous and next buttons on the top right of the reservations table to look at reservations in the past or future.
-
-The tables and their availability are listed in the list on the on the far right of the page.
-
-![dashboard](https://github.com/.png)
-
-## Searching for a Specific Reservation
-Users can search for a particular reservation by the mobile number associated with the reservation. This can be done by clicking the 'Search' option in the left-hand navigation.
-
-![searchByMobile](https://github.com/.png)
-
-## Managing Tables
-Expanding the restaurant? Create new tables by selecting the 'New Table' option in the left-hand navigation.
-
-![newTable](https://github.com/.png)
+## Seat Reservation
+![seat-reservation](/images/SeatReservation.PNG)
 
 
-# API
-
-## Create Reservation
-**POST** `/reservations`
-  - Required body:
-    | Param      |  type     |
-    | ---------- | ---------- |
-    | `first_name` | `str` |
-    | `last_name` | `str` |
-    | `people` | `int` |
-    | `reservation_date` | `date` |
-    | `reservation_time` | `str` |
-    | `mobile_number` | `str` |
-
-
+## Documentation for API 
+| Route                                | Description                                        | Methods |
+| ------------------------------------ | -------------------------------------------------- | ------- |
+| /reservations	                       | returns a list of reservations for current date    | GET     | 
+| /reservations                        | creates a new reservation                          | POST    |  
+| /reservations?date=YYYY-MM-DD        | returns a list of reservations for a given date    | GET     |
+| /reservations/:reservation_id	       | returns a reservation matching a given id          | GET     |
+| /reservations/:reservation_id	       | updates a reservation matching a given id          | PUT     |
+| /reservations/:reservation_id/status | updates the status of a reservation for a given id | PUT     |
+| /tables	                           | returns a list of tables                           | GET     |
+| /tables	                           | creates a new table                                | POST    |
+| /tables/:table_id/seat	           | moves reservation to a table for a given id        | PUT     |
+| /tables/:table_id/seat	           | remove a reservation from a table for a given id   | DELETE  |
 
 
-## Get Reservations by Date
-**GET** `/reservations?date=<reservation_date>`
+## Reservation Example
+```
+{
+    data: {
+        reservation_id: 5,
+        first_name: "Anthony",
+        last_name: "Charboneau",
+        mobile_number: "620-646-8897",
+        reservation_date: "2026-12-30",
+        reservation_time: "18:00:00",
+        people: 2,
+        status: "booked",
+        created_at: "2020-12-10T08:31:32.326Z",
+        updated_at: "2020-12-10T08:31:32.326Z"
+    }
+}
+```
 
-Returns reservations for a particular date
-
-
-
-## Get Reservations by Id
- `/reservations/:reservation_id`
-
-### Available Methods
-- **GET** - Returns a reservation given an existing reservation Id
-- **PUT** - Modifies an existing reservation given an existing reservation Id
-  - Required params:
-    - `reservation_id (int)`
-  - Required body:
-    | Param      |  type     |
-    | ---------- | ---------- |
-    | `first_name` | `str` |
-    | `last_name` | `str` |
-    | `people` | `int` |
-    | `reservation_date` | `date` |
-    | `reservation_time` | `str` |
-    | `mobile_number` | `str` |
-
-
-
-## Get Reservation Status
-**GET** `/reservations/:reservation_id/status`
-
-Returns a status of [ `booked, seated, finished, cancelled` ] for the particular reservation
-
-
-
-## Get Tables
-- **GET** `/tables`
-
-Returns the available tables.
-
-
-
-## Create Table
-- **POST** `/tables`
-
-Creates a table to be listed in the table list.
-
- - Required body:
-    | Param      |  type     |
-    | ---------- | ---------- |
-    | `table_name` | `str` |
-    | `capacity` | `int` |
-
-
-
-## Update Table Status
-- **PUT** `/tables/:table_id/seat`
-
-Sets table status to 'occupied' and ties a `restaurant_id` to it.
-
- - Required body:
-    | Param      |  type     |
-    | ---------- | ---------- |
-    | `reservation_id` | `int` |
-
-
-
-## Finish Table
-- **DELETE** `/tables/:table_id/seat`
-
-Sets the table status to `free` and the accompanying reservation status to `finished`
- - Required body:
-    | Param      |  type     |
-    | ---------- | ---------- |
-    | `reservation_id` | `int` |
+## Table Example
+```
+{
+    table_id: 3,
+    table_name: "#1",
+    capacity: 6,
+    reservation_id: 11
+}
+```
