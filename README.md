@@ -36,7 +36,7 @@ Periodic Tables is a restaurant reservation system desgined to be used by a rest
 ### <u>Client</u>
 * Built with create-react-app.
 * Uses [react-router](https://reactrouter.com/) for front-end routing
-* Styling is mostly vanilla CSS but also incorporates some [Bootstrap](https://getbootstrap.com/)
+* Styled with [Bootstrap](https://getbootstrap.com/)
 ### <u>Server</u>
 * Node and Express
 * Utilizes [Knex](https://knexjs.org/) for PostgreSQL query building
