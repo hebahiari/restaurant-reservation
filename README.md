@@ -44,6 +44,8 @@ Periodic Tables is a restaurant reservation system desgined to be used by a rest
 * Hosted by ElphantSQL
 ***
 
+# Screenshots
+
 ## Dashboard
 ![dashboard](/images/Dashboard.PNG)
 
