@@ -1,8 +1,8 @@
 ## Links
-* Deployed App: [Periodic Tables](https://restaurant-reservations-sys.herokuapp.com/)
+* Deployed App: [Booked. website](https://restaurant-reservations-sys.herokuapp.com/)
 
 ## Summary
-Periodic Tables is a restaurant reservation system desgined to be used by a restaurant manager/owner. The application allows the user to control all aspects of reservations and tables within the restaurant. This allows the user to have a clear view of the current status of the restaurant and quickly manage reservations as needed.
+Booked. is a restaurant reservation system desgined to be used by a restaurant manager/owner. The application allows the user to control all aspects of reservations and tables within the restaurant. This allows the user to have a clear view of the current status of the restaurant and quickly manage reservations as needed.
  * Reservations
     * View all reservations for a specified date
     * Create new Reservations
