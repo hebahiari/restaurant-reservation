@@ -18,6 +18,7 @@ function Dashboard({ date }) {
   const [tables, setTables] = useState([]);
   const [reservationsError, setReservationsError] = useState(null);
   const [tablesError, setTablesError] = useState(null);
+  const [loading, setLoading] = useState(false)
 
   // getting the selected date from the url
   const query = useQuery();
@@ -31,8 +32,10 @@ function Dashboard({ date }) {
   function loadDashboard() {
     const abortController = new AbortController();
     setReservationsError(null);
+    setLoading(true)
     listReservations({ date }, abortController.signal)
       .then(setReservations)
+      .then(() => setLoading(false))
       .catch(setReservationsError);
 
     ///is this ok?
@@ -44,6 +47,12 @@ function Dashboard({ date }) {
   const todaysDate = today();
   const nextDay = next(todaysDate);
   const PreviousDay = previous(todaysDate);
+
+  const loadingSpinner = (<div className="d-flex justify-content-center p-5 m-5">
+  <div className="spinner-border" role="status">
+    <span className="visually-hidden">Loading...</span>
+  </div>
+</div>)
 
   return (
     <>
@@ -62,7 +71,7 @@ function Dashboard({ date }) {
                 </div>
               </div>
 
-            <h6 className="my-2">Date: {date ? date : todaysDate}</h6>
+            <h6 className="my-2"><b>Date: </b>{date ? date : todaysDate}</h6>
             <div className="mb-3">
               <button
                 className="btn btn-secondary m-1"
@@ -86,6 +95,7 @@ function Dashboard({ date }) {
               </button>
             </div>
             <div className="text-left">
+              {loading ? loadingSpinner : null}
               <ListReservations reservations={reservations} />
               <ErrorAlert error={reservationsError} />
             </div>
@@ -105,6 +115,7 @@ function Dashboard({ date }) {
               </Link>
             </div>
           </div>
+          {loading ? loadingSpinner : null}
           <ListTables tables={tables} />
           <ErrorAlert error={tablesError} />
         </div>

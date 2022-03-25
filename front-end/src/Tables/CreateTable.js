@@ -1,6 +1,6 @@
-import { createTable } from "../utils/api";
-import { useHistory } from "react-router-dom";
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import { createTable } from "../utils/api";
 import TableForm from "./TableForm";
 import ErrorAlert from "../layout/ErrorAlert";
 

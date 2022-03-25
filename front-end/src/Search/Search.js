@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-// import { useHistory } from "react-router";
-import ListReservations from "../Reservations/ListReservations";
 import { search } from "../utils/api";
+import ListReservations from "../Reservations/ListReservations";
 import ErrorAlert from "../layout/ErrorAlert";
 
 function Search() {
@@ -9,6 +8,7 @@ function Search() {
   let [found, setFound] = useState();
   let [displayResult, setDisplayResult] = useState(false);
   const [searchError, setSearchError] = useState(null);
+  const [loading, setLoading] = useState(false);
   // const history = useHistory();
 
   const handleChange = (event) => {
@@ -18,9 +18,11 @@ function Search() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    setLoading(true)
     search(number)
       .then(setFound)
       .then(() => setDisplayResult(true))
+      .then(() => setLoading(false))
       .catch(setSearchError);
   };
 
@@ -28,40 +30,50 @@ function Search() {
     <p>No reservations found for this number: {number}</p>
   );
 
+  const loadingSpinner = (
+    <div className="card-main col-12 p-4 mb-3">
+    <div className="d-flex justify-content-center p-5 m-5">
+      <div className="spinner-border" role="status">
+        <span className="visually-hidden">Loading...</span>
+      </div>
+    </div>
+    </div>
+  );
+
   return (
     <>
-    <div className="card-main col-md-8 p-4 mb-3">
-      <form  className="mx-3" onSubmit={handleSubmit}>
-        <h2 className="mb-3">Search</h2>
-        <div className="mb-3">
-          <input
-            className="form-control"
-            id="mobile_number"
-            name="mobile_number"
-            required
-            onChange={handleChange}
-            value={number}
-            placeholder="Insert phone number"
-          />
-        </div>
+      <div className="card-main col-12 p-4 mb-3">
+        <form className="mx-3" onSubmit={handleSubmit}>
+          <h2 className="mb-3">Search</h2>
+          <div className="mb-3">
+            <input
+              className="form-control"
+              id="mobile_number"
+              name="mobile_number"
+              required
+              onChange={handleChange}
+              value={number}
+              placeholder="Insert phone number"
+            />
+          </div>
 
-        <button type="submit" className="btn btn-primary m-1">
-          Search
-        </button>
-      </form>
-      <ErrorAlert error={searchError} />
-  
-      
-    </div>
+          <button type="submit" className="btn btn-primary m-1">
+            Search
+          </button>
+        </form>
+        <ErrorAlert error={searchError} />
+      </div>
+      {loading? loadingSpinner : null}
       {displayResult ? (
-        found.length ? (<div className="card-main col-md-8 p-4 mb-3">
-          <ListReservations reservations={found} />
+        found.length ? (
+          <div className="card-main col-12 p-4 mb-3">
+            <ListReservations reservations={found} />
           </div>
         ) : (
           noReservationsFound
         )
       ) : null}
-      </>
+    </>
   );
 }
 

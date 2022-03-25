@@ -30,9 +30,9 @@ function handleFinishButton() {
 
     return (<div className="card text-white m-3 row-md-2 border-0 ">
     <div className="card-body">
-      <h5 className="card-title"> <b>Table:</b> {table_name}  </h5>
-      <p className="card-text"><b>Capacity: </b>{capacity}</p>
-      <p className="card-text" data-table-id-status={table.table_id}>Status: {reservation_id ? "Occupied" : "Free"}</p>
+      <h5 className="card-title mb-3"> <b>Table:</b> {table_name}  </h5>
+      <p className="card-text pb-0 mb-0"><b>Capacity: </b>{capacity}</p>
+      <p className="card-text" data-table-id-status={table.table_id}><b>Status: </b>{reservation_id ? "Occupied" : "Free"}</p>
       {table.reservation_id ? finishButton : null}
     </div>
   </div>)

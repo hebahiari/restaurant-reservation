@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import ReservationCard from "./ReservationCard";
 import { useParams } from "react-router";
 import { getReservation } from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert";
+import ReservationCard from "./ReservationCard";
 
 function DisplayReservation() {
 

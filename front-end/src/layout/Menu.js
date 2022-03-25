@@ -25,12 +25,6 @@ function Menu() {
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="/search">
-              <span className="oi oi-magnifying-glass" />
-              &nbsp;Search
-            </Link>
-          </li>
-          <li className="nav-item">
             <Link className="nav-link" to="/reservations/new">
               <span className="oi oi-plus" />
               &nbsp;New Reservation
@@ -41,6 +35,23 @@ function Menu() {
               <span className="oi oi-plus" />
               &nbsp;New Table
             </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" to="/search">
+              <span className="oi oi-magnifying-glass" />
+              &nbsp;Search
+            </Link>
+          </li>
+          <li>
+          {/* <div class="input-group">
+  <div className="form-outline">
+    <input type="search" id="form1" className="form-control" />
+    <label className="form-label" for="form1">Search by phone number</label>
+  </div>
+  <button type="button" className="btn btn-primary">
+    <i className="fas fa-search"></i>
+  </button>
+</div> */}
           </li>
         </ul>
         <div className="text-center d-none d-md-inline">
