@@ -54,7 +54,7 @@ function EditReservation() {
   };
 
   return (
-    <div className="card card-main bg-dark col-md-8 p-4">
+    <div className="card-main col-md-8 p-4">
       <h1>Edit Reservation</h1>
       <ReservationForm
         handleSubmit={handleSubmit}

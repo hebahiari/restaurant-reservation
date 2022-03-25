@@ -101,13 +101,16 @@ function ReservationForm({ handleChange, handleSubmit, reservation, history }) {
           value={reservation.people}
         />
       </div>
-
-      <button className="btn btn-secondary m-1" onClick={() => history.go(-1)}>
-        Cancel
-      </button>
+      <div className="row justify-content-end">
+        <div className="col col-auto align-self-end">
       <button type="submit" className="btn btn-primary m-1">
         Submit
       </button>
+      <button className="btn btn-secondary m-1" onClick={() => history.go(-1)}>
+        Cancel
+      </button>
+      </div>
+      </div>
     </form>
 
   );

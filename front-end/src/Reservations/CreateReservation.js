@@ -49,7 +49,7 @@ function CreateReservation() {
   }
 
   return (
-    <div className="card card-main bg-dark col-md-8 p-4" >
+    <div className="card-main col-md-8 p-4" >
       <h1>Create New Reservation</h1>
       <ReservationForm
         handleSubmit={handleSubmit}

@@ -30,7 +30,7 @@ function Search() {
 
   return (
     <>
-    <div className="card card-main bg-dark col-md-8 p-4 mb-3">
+    <div className="card-main col-md-8 p-4 mb-3">
       <form  className="mx-3" onSubmit={handleSubmit}>
         <h2 className="mb-3">Search</h2>
         <div className="mb-3">
@@ -54,7 +54,7 @@ function Search() {
       
     </div>
       {displayResult ? (
-        found.length ? (<div className="card card-main bg-dark col-md-8 p-4 mb-3">
+        found.length ? (<div className="card-main col-md-8 p-4 mb-3">
           <ListReservations reservations={found} />
           </div>
         ) : (

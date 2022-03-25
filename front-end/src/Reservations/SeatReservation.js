@@ -39,7 +39,7 @@ function SeatReservation() {
   };
 
   return (
-    <fieldset className="card card-main bg-dark col-md-8 p-4 mb-3 text-center" >
+    <fieldset className="card-main col-md-8 p-4 mb-3 text-center" >
       <legend>Select Table</legend>
       <h6 className="pb-2">table name - capacity</h6>
       <div>
@@ -55,8 +55,8 @@ function SeatReservation() {
           <option value="" selected disabled hidden>
             Choose here
           </option>
-          {tables.map((table, index) => (
-            <option value={table.table_id} key={index}>
+          {tables.map((table) => (
+            <option value={table.table_id} key={table.table_id}>
               {table.table_name} - {table.capacity}      ({table.reservationId? "Occupied" : "Available"})
             </option>
           ))}

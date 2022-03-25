@@ -32,12 +32,16 @@ return(
             value={newTable.capacity}
           />
         </div>
+        <div className="row justify-content-end">
+          <div className="col col-auto">
         <button type="submit" className="btn btn-primary m-1">
           Submit
         </button>
       <button className="btn btn-secondary m-1" onClick={() => history.go(-1)}>
           Cancel
         </button>
+        </div>
+        </div>
       </form>
 )
 }

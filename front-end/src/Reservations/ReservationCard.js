@@ -65,7 +65,7 @@ function ReservationCard({ reservation }) {
   );
 
   return (
-    <div className="card text-white m-3 row-md-2 border-0 p-3 ">
+    <div className="card text-white m-3 my-4 row-md-2 border-0 ">
       <h5 className="card-header "> Reservation ID: {reservation_id} </h5>
       <div className="card-body p-3 ">
         <p className="card-text">
@@ -84,16 +84,14 @@ function ReservationCard({ reservation }) {
           Status: {status}
         </p>
 
-        <div class="container p-0">
-          <div className="row pt-3 justify-content-between">
+        <div className="container p-0">
+          <div className="row pt-3 mx-2 justify-content-between">
             <div className="col p-0">
-              {" "}
-              {status === "booked" ? seatButton : null}{" "}
-              {status === "booked" ? editButton : null}{" "}
+              {status === "booked" ? cancelButton : null}
             </div>
             <div className="col-auto p-0">
-              {" "}
-              {status === "booked" ? cancelButton : null}{" "}
+              {status === "booked" ? editButton : null}
+              {status === "booked" ? seatButton : null}
             </div>
           </div>
         </div>
