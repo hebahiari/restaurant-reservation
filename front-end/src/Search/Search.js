@@ -9,7 +9,6 @@ function Search() {
   let [displayResult, setDisplayResult] = useState(false);
   const [searchError, setSearchError] = useState(null);
   const [loading, setLoading] = useState(false);
-  // const history = useHistory();
 
   const handleChange = (event) => {
     setNumber(event.target.value);

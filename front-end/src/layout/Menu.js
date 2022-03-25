@@ -1,7 +1,5 @@
-import React from "react";
-
-import { Link } from "react-router-dom";
-
+import React, { useState } from "react";
+import { Link, useHistory } from "react-router-dom";
 /**
  * Defines the menu for this application.
  *
@@ -9,19 +7,40 @@ import { Link } from "react-router-dom";
  */
 
 function Menu() {
+
+  const history = useHistory();
+  let [number, setNumber] = useState();
+
+  const handleChange = (event) => {
+    setNumber(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    history.push('search?mobile_number=%{number}')
+  };
+
+
   return (
-    <nav className="navbar shadow fixed-top navbar-dark align-items-start p-2" style={{ backgroundColor: "#1f424b"}}>
-      <div className="container-fluid d-flex flex-row p-0">
-        <Link
-          className="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0"
-          to="/"
-        >
-        </Link>
-        <ul className="nav justify-content-center" id="accordionSidebar">
-          <li className="nav-item">
+    <nav className="navbar navbar-expand-md shadow fixed-top navbar-dark bg-dark">
+      <a className="navbar-brand" href="#">
+        Booked.
+      </a>
+      <button
+        className="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+      >
+        <span className="navbar-toggler-icon"></span>
+      </button>
+
+      <div className="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul className="navbar-nav mx-auto">
+          <li className="nav-item active">
             <Link className="nav-link" to="/dashboard">
               <span className="oi oi-home" />
-              &nbsp;Dashboard
+              &nbsp;Home
             </Link>
           </li>
           <li className="nav-item">
@@ -36,20 +55,20 @@ function Menu() {
               &nbsp;New Table
             </Link>
           </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/search">
-              <span className="oi oi-magnifying-glass" />
-              &nbsp;Search
-            </Link>
-          </li>
         </ul>
-        <div className="text-center d-none d-md-inline">
-          <button
-            className="btn rounded-circle border-0"
-            id="sidebarToggle"
-            type="button"
+        <form className="form-inline" onSubmit={handleSubmit}>
+          <input
+            className="form-control mr-sm-2"
+            type="search"
+            placeholder="Search by phone number"
+            aria-label="Search"
+            onChange={handleChange}
+            value={number}
           />
-        </div>
+          <button className="btn btn-light my-sm-0" type="submit">
+            Search
+          </button>
+        </form>
       </div>
     </nav>
   );
