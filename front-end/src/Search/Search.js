@@ -29,7 +29,7 @@ function Search() {
   );
 
   return (
-    <div className="card bg-dark col-md-8 p-4 mb-3 text-center" style={{ backgroundColor: "#1f424b", borderRadius: "1.25rem" }}>
+    <div className="card card-main bg-dark col-md-8 p-4 mb-3 text-center">
       <form  onSubmit={handleSubmit}>
         <h2 className="pb-2">Search</h2>
         <div className="mb-3">

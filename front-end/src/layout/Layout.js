@@ -20,11 +20,11 @@ function Layout() {
       <div className="container">
         <div className="row-12">
           <h1
-            className="m3 text-center header-logo"
-            style={{ fontFamily: "'Seven Day Signature', sans-serif" }}
+            className="text-center header-logo"
           >
             Periodic Tables
           </h1>
+          {/* <p text-right>the ultimate restaurant reservation system</p> */}
           <div className="row gx-5 justify-content-center align-items-start">
             <Routes />
           </div>

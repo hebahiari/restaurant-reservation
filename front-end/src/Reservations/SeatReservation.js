@@ -39,7 +39,7 @@ function SeatReservation() {
   };
 
   return (
-    <fieldset className="card bg-dark col-md-8 p-4 mb-3 text-center" style={{ backgroundColor: "#1f424b", borderRadius: "1.25rem" }}>
+    <fieldset className="card card-main bg-dark col-md-8 p-4 mb-3 text-center" >
       <legend>Select Table</legend>
       <div>
         <select

@@ -109,6 +109,7 @@ function ReservationForm({ handleChange, handleSubmit, reservation, history }) {
         Submit
       </button>
     </form>
+
   );
 }
 
