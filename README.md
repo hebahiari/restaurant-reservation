@@ -1,6 +1,29 @@
 ## Links
 * Deployed App: [Periodic Tables](https://restaurant-reservations-sys.herokuapp.com/)
 
+## Summary
+Periodic Tables is a restaurant reservation system desgined to be used by a restaurant manager/owner. The application allows the user to control all aspects of reservations and tables within the restaurant. This allows the user to have a clear view of the current status of the restaurant and quickly manage reservations as needed.
+ * Reservations
+    * View all reservations for a specified date
+    * Create new Reservations
+    * Cancel existing Reservations
+    * Search for a reservation via the customer's phone number
+    * Edit/update existing reservation details and status 
+    * Seat a reservation at a table
+* Tables
+    * View all tables and whether they are occupied or open
+    * Create new tables
+    * Clear tables (When a reservation is finished and the table is ready for the next guest)
+        * Changes an occupied table's status from "Occupied" to "Free"
+* Built-in validation
+    * Application ensures reservations can only be created/updated within a valid date/time-window
+        * Cannot create reservations for past dates, reservations can only be created between 9:30 am and 10:30 pm
+        * Reservations cannot be created for Tuesdays (Restaurant closed)
+        * Validates all inputs for proper formatting
+    * When the user attempts to seat a reservation at a table, the application will make sure that the selected table has proper capacity for the reservation
+    * Unoccupied tables cannot be cleared
+***
+
 ## Installation
 1. Go to the project root
 2. Run `npm install` to install dependencies
@@ -9,23 +32,17 @@
 5. Start frontend/backend tests with `npm run test:frontend or npm run test:backend`
 6. Start individual tests for each user stories with `npm run test:1:frontend` replace 1 with the desired user story or replace frontend with backend
 
-## Summary
-Built a full-stack web app for use as an internal tool to manage restaurant reservations.
-
-Has the following features:
-* users can create, edit, or cancel a reservation
-* users can create a table
-* users can seat reservations to a table
-* users can finish a table
-* users can search for reservations by phone numbers 
-
-## Stack
-* React
-* Bootstrap
-* Node
-* Express
-* PostgreSQL
-* Knex.js
+## Technology
+### <u>Client</u>
+* Built with create-react-app.
+* Uses [react-router](https://reactrouter.com/) for front-end routing
+* Styling is mostly vanilla CSS but also incorporates some [Bootstrap](https://getbootstrap.com/)
+### <u>Server</u>
+* Node and Express
+* Utilizes [Knex](https://knexjs.org/) for PostgreSQL query building
+### <u>Database</u>
+* Hosted by ElphantSQL
+***
 
 ## Dashboard
 ![dashboard](/images/Dashboard.PNG)
