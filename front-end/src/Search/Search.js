@@ -1,14 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import useQuery from "../utils/useQuery";
 import { search } from "../utils/api";
 import ListReservations from "../Reservations/ListReservations";
 import ErrorAlert from "../layout/ErrorAlert";
 
 function Search() {
-  let [number, setNumber] = useState();
+  let [number, setNumber] = useState("");
   let [found, setFound] = useState();
   let [displayResult, setDisplayResult] = useState(false);
   const [searchError, setSearchError] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  let queryNumber = 0;
+
+  const query = useQuery();
+  if (query.get("mobile_number")) {
+    queryNumber = query.get("mobile_number")
+  }
+
+  //load found reservations
+  useEffect(() => {
+    setNumber(queryNumber)
+    search(number)
+    .then(setFound)
+    .then(() => setDisplayResult(true))
+    .then(() => setLoading(false))
+    .catch(setSearchError);
+  }, []);
+
 
   const handleChange = (event) => {
     setNumber(event.target.value);
@@ -31,7 +50,7 @@ function Search() {
 
   const loadingSpinner = (
     <div className="row  justify-content-center ">
-    <div className="card-main col-6 p-4 mb-3 justify-content-center">
+    <div className="card-main col-8 p-4 mb-3 justify-content-center">
     <div className="d-flex justify-content-center p-5 m-5">
       <div className="spinner-border" role="status">
         <span className="visually-hidden">Loading...</span>
@@ -45,7 +64,7 @@ function Search() {
     <>
     <div className="container">
       <div className="row justify-content-center">
-      <div className="card-main col-6 pb-4 mb-3">
+      <div className="card-main col-8 pb-4 mb-3">
         <form className="mx-3" onSubmit={handleSubmit}>
           <h2 className="mb-3">Search</h2>
           <div className="mb-3">
@@ -71,7 +90,7 @@ function Search() {
       {displayResult ? (
         found.length ? (
           <div className="row  justify-content-center ">
-          <div className="card-main col-6 p-4 mb-3">
+          <div className="card-main col-8 p-4 mb-3">
             <ListReservations reservations={found} />
           </div>
           </div>
