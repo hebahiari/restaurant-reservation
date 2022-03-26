@@ -14,11 +14,16 @@ import { Link } from "react-router-dom";
  * @returns {JSX.Element}
  */
 function Dashboard({ date }) {
-  const [reservations, setReservations] = useState([]);
-  const [tables, setTables] = useState([]);
-  const [reservationsError, setReservationsError] = useState(null);
-  const [tablesError, setTablesError] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [stateForm, setStateForm] = useState({
+    reservations: [],
+    tables: [],
+    reservationsError: null,
+    tablesError: null,
+    loading: false,
+  });
+
+  const { reservations, tables, reservationsError, tablesError, loading } =
+    stateForm;
 
   // getting the selected date from the url
   const query = useQuery();
@@ -31,14 +36,23 @@ function Dashboard({ date }) {
   // sending api calls to list the reservations and tables
   function loadDashboard() {
     const abortController = new AbortController();
-    setReservationsError(null);
-    setLoading(true);
+    setStateForm((currentStateForm) => ({ ...currentStateForm, reservationsError: null, loading: true }))
     listReservations({ date }, abortController.signal)
-      .then(setReservations)
-      .then(() => setLoading(false))
-      .catch(setReservationsError);
-
-    listTables(abortController.signal).then(setTables).catch(setTablesError);
+      .then((reservationResponse) =>
+        setStateForm((currentStateForm) => ({
+          ...currentStateForm,
+          reservations: reservationResponse,
+          loading: false,
+        }))
+      )
+      .catch((error) =>
+        setStateForm((currentStateForm)=>({ ...currentStateForm, reservationsError: error }))
+      )
+      .then(() => listTables(abortController.signal))
+      .then((tablesResponse) =>
+        setStateForm((currentStateForm)=>({ ...currentStateForm, tables: tablesResponse }))
+      )
+      .catch((error) => setStateForm((currentStateForm)=>({ ...currentStateForm, tablesError: error })));
     return () => abortController.abort();
   }
 
@@ -91,7 +105,7 @@ function Dashboard({ date }) {
             </div>
 
             <h6 className="my-2">
-              <b>Date: </b>
+              Date:
               {date ? date : todaysDate}
             </h6>
             <div className="mb-3">
@@ -119,7 +133,7 @@ function Dashboard({ date }) {
             <div className="text-left">
               {loading ? loadingSpinner : null}
               <ListReservations reservations={reservations} />
-              {(!reservations.length && !loading) ? (
+              {!reservations.length && !loading ? (
                 <div className="container p-3 text-center">
                   <p>No reservations found for this date.</p>
                   {addReservationButton}
@@ -145,7 +159,7 @@ function Dashboard({ date }) {
           </div>
           {loading ? loadingSpinner : null}
           <ListTables tables={tables} />
-          {(!tables.length && !loading) ? (
+          {!tables.length && !loading ? (
             <div className="container p-3 text-center">
               <p>No Tables found</p>
               {addTableButton}

@@ -66,22 +66,22 @@ function ReservationCard({ reservation }) {
 
   return (
     <div className="card text-white m-3 my-4 row-md-2 border-0 ">
-      <h5 className="card-header "> <b>Reservation ID:</b> {reservation_id} </h5>
+      <h5 className="card-header "> Reservation ID: {reservation_id} </h5>
       <div className="card-body p-4 ">
         <p className="card-text">
-        <b>Name: </b> {first_name} {last_name}
+        Name:  {first_name} {last_name}
         </p>
-        <p className="card-text"><b>People: </b>{people} </p>
-        <p className="card-text"><b>Mobile number: </b>{mobile_number} </p>
+        <p className="card-text">People: {people} </p>
+        <p className="card-text">Mobile number: {mobile_number} </p>
         <p className="card-text">
-        <b>Date/Time: </b>{reservation_date.slice(0, 10)} /
+        Date/Time: {reservation_date.slice(0, 10)} /
           {reservation_time.slice(0, 5)}
         </p>
         <p
           className="card-text"
           data-reservation-id-status={reservation.reservation_id}
         >
-          <b>Status: </b>{status}
+          Status: {status}
         </p>
       </div>
       {status === "booked" ? (<div className=" dark-bg container px-1 pb-3 pe-3">

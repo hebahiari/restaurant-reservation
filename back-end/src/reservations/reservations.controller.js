@@ -85,7 +85,7 @@ function hasFutureWorkingDate(req, res, next) {
     next();
 }
 
-async function hasEligibleTime(req, res, next) {
+function hasEligibleTime(req, res, next) {
     let hours = res.locals.time.getUTCHours();
     let minutes = res.locals.time.getUTCMinutes();
     if (
@@ -102,7 +102,7 @@ async function hasEligibleTime(req, res, next) {
     next();
 }
 
-async function statusIsBooked(req, res, next) {
+function statusIsBooked(req, res, next) {
     if (
         req.body &&
         req.body.data &&
@@ -136,7 +136,7 @@ async function changeStatus(req, res, next) {
     res.status(200).json({ data });
 }
 
-async function bodyHasValidStatus(req, res, next) {
+function bodyHasValidStatus(req, res, next) {
     const { status } = req.body.data;
     res.locals.status = status
     if (!status ||
@@ -155,7 +155,7 @@ async function bodyHasValidStatus(req, res, next) {
     next();
 }
 
-async function reservationIsNotFinished(req, res, next) {
+function reservationIsNotFinished(req, res, next) {
     const reservation = res.locals.reservation;
     if (reservation.status == "finished") {
         next({

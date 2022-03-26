@@ -5,11 +5,15 @@ import ListReservations from "../Reservations/ListReservations";
 import ErrorAlert from "../layout/ErrorAlert";
 
 function Search() {
-  let [number, setNumber] = useState("");
-  let [found, setFound] = useState();
-  let [displayResult, setDisplayResult] = useState(false);
-  const [searchError, setSearchError] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [stateForm, setStateForm] = useState({
+    number: "",
+    found: "",
+    displayResult: false,
+    searchError: null,
+    loading: false,
+  });
+
+  const {number, found, displayResult, searchError, loading} = stateForm;
 
   let queryNumber = 0;
 
@@ -21,34 +25,51 @@ function Search() {
   //load found reservations
   useEffect(() => {
     if (queryNumber) {
-      setNumber(queryNumber);
-      search(queryNumber)
-        .then(setFound)
-        .then(() => setDisplayResult(true))
-        .then(() => setLoading(false))
-        .catch(setSearchError);
+      setStateForm((currentState) => ({
+        ...currentState,
+        number: queryNumber,
+      }));
+      loadResults(queryNumber);
     }
   }, [queryNumber]);
 
   const handleChange = (event) => {
-    setNumber(event.target.value);
-    setDisplayResult(false);
+    setStateForm((currentState) => ({
+      ...currentState,
+      number: event.target.value,
+      displayResult: false
+    }));
   };
+
+  function loadResults(phoneNumber) {
+    const abortController = new AbortController();
+    setStateForm((currentState) => ({
+      ...currentState,
+      loading: true,
+    }));
+    search(phoneNumber, abortController.signal)
+      .then((response) => setStateForm((currentState) => ({
+        ...currentState,
+        found: response,
+        displayResult:true,
+        loading:false
+      })))
+      .catch((error) => setStateForm((currentState) => ({
+        ...currentState,
+        searchError: error,
+      })))
+    return () => abortController.abort();
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setLoading(true);
-    search(number)
-      .then(setFound)
-      .then(() => setDisplayResult(true))
-      .then(() => setLoading(false))
-      .catch(setSearchError);
+    loadResults(number);
   };
 
   const noReservationsFound = (
     <div className="row  justify-content-center ">
       <div className="card-main col-10 p-4 mb-3 justify-content-center text-center">
-      <p>No reservations found for this number: {number}</p>
+        <p>No reservations found for this number: {number}</p>
       </div>
     </div>
   );

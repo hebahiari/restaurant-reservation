@@ -5,39 +5,48 @@ import ErrorAlert from "../layout/ErrorAlert";
 
 function SeatReservation() {
   const { reservationId } = useParams();
-  const [tables, setTables] = useState([]);
-  const [selectedTableId, setSelectedTableId] = useState("");
-  const [tablesError, setTablesError] = useState(null);
   const history = useHistory();
+  const [stateForm, setStateForm] = useState({
+    tables: [],
+    selectedTableId: "",
+    tablesError: null,
+  });
+
+  const { tables, selectedTableId, tablesError } = stateForm;
 
   useEffect(loadTables, []);
 
   // sending an api call to retrieve the tables information
   function loadTables() {
     const abortController = new AbortController();
-    setTablesError(null);
+    setStateForm((currenState) => ({ ...currenState, tablesError: null }));
     listTables(abortController.signal)
-    .then(setTables)
-    .catch(setTablesError);
+      .then((response) =>
+        setStateForm((currenState) => ({ ...currenState, tables: response }))
+      )
+      .catch((error) =>
+        setStateForm((currenState) => ({ ...currenState, tablesError: error }))
+      );
     return () => abortController.abort();
   }
 
   // controlling the component
   const handleTableChange = (event) => {
-    setSelectedTableId(event.target.value);
+    setStateForm((currenState) => ({ ...currenState, selectedTableId: event.target.value }))
   };
 
-// sending an api call to add the reservation id to the selected table
+  // sending an api call to add the reservation id to the selected table
   const handleConfirmButton = (event) => {
     event.preventDefault();
     seatReservation(selectedTableId, reservationId)
-      // .then(() => changeStatus(reservationId, "seated"))
       .then(() => history.push("/"))
-      .catch(setTablesError);
+      .catch((error) =>
+        setStateForm((currenState) => ({ ...currenState, tablesError: error }))
+      );
   };
 
   return (
-    <fieldset className="card-main col-md-8 p-4 mb-3 text-center" >
+    <fieldset className="card-main col-md-8 p-4 mb-3 text-center">
       <h3>Select Table</h3>
       <h6 className="pb-2">table name - capacity</h6>
       <div>
@@ -47,16 +56,13 @@ function SeatReservation() {
           required={true}
           onChange={handleTableChange}
           value={selectedTableId}
-          className="form-select" 
-          multiple aria-label="size 5 select example"
+          className="form-select"
+          multiple
+          aria-label="size 5 select example"
         >
-          <option value="" selected disabled hidden>
-            Choose here
-          </option>
           {tables.map((table) => (
             <option value={table.table_id} key={table.table_id}>
-              {table.table_name} - {table.capacity}      
-              {/* ({table.reservationId? "Occupied" : "Available"}) */}
+              {table.table_name} - {table.capacity}
             </option>
           ))}
         </select>

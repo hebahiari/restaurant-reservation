@@ -12,9 +12,11 @@ const [ getReservationError, setGetReservationError ] = useState(null);
 
 //retrieving the reservation from the database
 useEffect(() => {
-    getReservation(reservationId)
-    .then(setReservation)
-    .catch(setGetReservationError)
+    const abortController = new AbortController();
+    getReservation(reservationId, abortController.signal)
+        .then(setReservation)
+        .catch(setGetReservationError);
+    return () => abortController.abort();
 }, [reservationId])
     
   return (

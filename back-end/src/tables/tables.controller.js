@@ -24,7 +24,7 @@ async function update(req, res) {
     res.status(200).json({ data });
 }
 
-async function hasProperNameAndCapacity(req, res, next) {
+function hasProperNameAndCapacity(req, res, next) {
     const { table_name, capacity } = req.body.data;
     if (table_name.length < 2) {
         next({
@@ -41,7 +41,7 @@ async function hasProperNameAndCapacity(req, res, next) {
     next();
 }
 
-async function requestHasBody(req, res, next) {
+function requestHasBody(req, res, next) {
     if (!req.body || !req.body.data || !req.body.data.reservation_id) {
         next({
             message: "request needs a body that has reservation_id",
@@ -87,7 +87,7 @@ async function reservationExists(req, res, next) {
     next();
 }
 
-async function tableIsAvailable(req, res, next) {
+function tableIsAvailable(req, res, next) {
     let table = res.locals.table;
     if (table.reservation_id) {
         next({
@@ -111,7 +111,7 @@ async function tableExists(req, res, next) {
     next();
 }
 
-async function tableIsOccupied(req, res, next) {
+function tableIsOccupied(req, res, next) {
     let table = res.locals.table;
     if (!table.reservation_id) {
         next({
@@ -134,7 +134,7 @@ async function changeStatus(req, res, next) {
     next();
 }
 
-async function reservationIsBooked(req, res, next) {
+function reservationIsBooked(req, res, next) {
     let reservation = res.locals.reservation;
     if (reservation.status !== "booked") {
         next({

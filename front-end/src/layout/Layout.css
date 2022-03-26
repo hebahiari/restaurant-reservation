@@ -8,10 +8,12 @@ body {
     color: aliceblue;
     background-image: url("../background.jpg");
     background-size: 400px;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .header-logo {
     font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
     font-size: 100px;
     text-align: center;
     color: #e7e7e7;
