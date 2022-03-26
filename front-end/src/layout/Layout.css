@@ -1,4 +1,4 @@
-.navbar {
+.navbar.main-navbar {
     min-width: 200px;
     background-color: #073642;
 }
@@ -49,7 +49,7 @@ html {
 }
 
 .nav-link {
-    color: #2aa198;
+    color: #2aa198 !important
 }
 
 .card-body {
@@ -97,7 +97,7 @@ html {
 }
 
 .white-text {
-    color: white;
+    color: white !important
 }
 
 .alert-danger {
@@ -109,5 +109,11 @@ html {
 @media all and (min-width: 950px) {
     .logo {
         margin-right: 200px;
+    }
+}
+
+@media all and (max-width: 550px) {
+    .header-logo {
+        font-size: 18.9vw;
     }
 }
