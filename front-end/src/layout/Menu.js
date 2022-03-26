@@ -9,7 +9,7 @@ import { Link, useHistory } from "react-router-dom";
 function Menu() {
 
   const history = useHistory();
-  let [number, setNumber] = useState();
+  let [number, setNumber] = useState("");
 
   const handleChange = (event) => {
     setNumber(event.target.value);
@@ -62,7 +62,7 @@ function Menu() {
           <input
             className="form-control mr-2"
             type="search"
-            placeholder="Search by phone#"
+            placeholder="Search by phone number"
             aria-label="Search"
             onChange={handleChange}
             value={number}
