@@ -5,7 +5,7 @@ import ListReservations from "../Reservations/ListReservations";
 import ErrorAlert from "../layout/ErrorAlert";
 
 function Search() {
-  let [number, setNumber] = useState("");
+  let [number, setNumber] = useState();
   let [found, setFound] = useState();
   let [displayResult, setDisplayResult] = useState(false);
   const [searchError, setSearchError] = useState(null);
@@ -20,12 +20,14 @@ function Search() {
 
   //load found reservations
   useEffect(() => {
+    if(queryNumber) {
     setNumber(queryNumber)
     search(number)
     .then(setFound)
     .then(() => setDisplayResult(true))
     .then(() => setLoading(false))
     .catch(setSearchError);
+  }
   }, []);
 
 
@@ -45,7 +47,11 @@ function Search() {
   };
 
   const noReservationsFound = (
+    <div className="row  justify-content-center ">
+    <div className="card-main col-8 p-4 mb-3 justify-content-center center-text">
     <p>No reservations found for this number: {number}</p>
+    </div>
+    </div>
   );
 
   const loadingSpinner = (

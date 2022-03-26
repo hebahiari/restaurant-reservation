@@ -56,7 +56,7 @@ function Dashboard({ date }) {
 
   return (
     <>
-      <div className="col-lg-7 col-md-7 col-xs-6 col-sm-12 align-self-start m-2 card-main">
+      <div className="col-lg-7 col-md-7 col-xs-6 col-sm-12 align-self-start m-2 me-4 card-main">
         <div className="text-center">
           <div>
               <div className="row p-0 justify-content-center">

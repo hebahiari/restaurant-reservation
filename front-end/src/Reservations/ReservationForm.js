@@ -103,7 +103,7 @@ function ReservationForm({ handleChange, handleSubmit, reservation, history }) {
       </div>
       <div className="row justify-content-end">
         <div className="col col-auto align-self-end">
-      <button type="submit" className="btn btn-primary m-1">
+      <button type="submit" className="btn btn-primary m-1" onClick={handleSubmit}>
         Submit
       </button>
       <button className="btn btn-secondary m-1" onClick={() => history.go(-1)}>

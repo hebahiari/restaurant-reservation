@@ -9,7 +9,7 @@ import { Link, useHistory } from "react-router-dom";
 function Menu() {
 
   const history = useHistory();
-  let [number, setNumber] = useState("");
+  let [number, setNumber] = useState();
 
   const handleChange = (event) => {
     setNumber(event.target.value);
@@ -17,7 +17,9 @@ function Menu() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    if(number) {
     history.push(`search?mobile_number=${number}`)
+  }
   };
 
 
@@ -56,7 +58,7 @@ function Menu() {
             </Link>
           </li>
         </ul>
-        <form className="form-inline" onSubmit={handleSubmit}>
+        <form className="form-inline">
           <input
             className="form-control mr-2"
             type="search"
@@ -66,7 +68,7 @@ function Menu() {
             value={number}
             required
           />
-          <button className="btn btn-light my-sm-0" type="submit">
+          <button className="btn btn-light my-sm-0" onClick={handleSubmit}>
             Search
           </button>
         </form>
