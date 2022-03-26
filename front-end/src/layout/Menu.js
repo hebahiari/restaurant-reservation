@@ -24,7 +24,7 @@ function Menu() {
 
 
   return (
-    <nav className="navbar navbar-expand-md shadow fixed-top navbar-dark bg-dark">
+    <nav className="navbar navbar-expand-md shadow fixed-top navbar-dark ">
       <a className="navbar-brand" href="/">
         Booked.
       </a>

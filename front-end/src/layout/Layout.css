@@ -1,6 +1,6 @@
-.nav-bar {
-    background-color: #393a44;
+.navbar {
     min-width: 200px;
+    background-color: #073642;
 }
 
 body {
@@ -46,4 +46,42 @@ html {
     right: 10px;
     position: absolute;
     top: 10px;
+}
+
+.nav-link {
+    color: #2aa198;
+}
+
+.card-body {
+    background-color: #39575d;
+    border: #1f424b;
+}
+
+.card-header {
+    background-color: #2d4f57;
+    border: #1f424b;
+}
+
+.btn-success {
+    background-color: #2aa198;
+}
+
+.btn-primary {
+    background-color: #b58900;
+}
+
+.form-control {
+    background-color: #a9bdbd;
+}
+
+.dark-bg {
+    background-color: #39575d;
+}
+
+.card {
+    background-color: #1f424b;
+}
+
+.btn-secondary {
+    background-color: #839496;
 }

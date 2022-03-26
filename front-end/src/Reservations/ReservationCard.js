@@ -84,8 +84,8 @@ function ReservationCard({ reservation }) {
           <b>Status: </b>{status}
         </p>
       </div>
-      {status === "booked" ? (<div className="container px-1 pb-3 pe-3">
-          <div className="row pt-3 mx-2 justify-content-between">
+      {status === "booked" ? (<div className=" dark-bg container px-1 pb-3 pe-3">
+          <div className="row dark-bg pt-3 mx-2 justify-content-between">
             <div className="col p-0">
               {cancelButton}
             </div>

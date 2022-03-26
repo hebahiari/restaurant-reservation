@@ -28,7 +28,7 @@ function Search() {
     .then(() => setLoading(false))
     .catch(setSearchError);
   }
-  }, []);
+  }, [queryNumber]);
 
 
   const handleChange = (event) => {
