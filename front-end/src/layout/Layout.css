@@ -85,3 +85,17 @@ html {
 .btn-secondary {
     background-color: #839496;
 }
+
+.form-select {
+    display: block;
+    width: 100%;
+    padding: 0.375rem 2.25rem 0.375rem 0.75rem;
+    color: #073642;
+    background-color: #a9bdbd;
+}
+
+@media all and (min-width: 950px) {
+    .logo {
+        margin-right: 200px;
+    }
+}

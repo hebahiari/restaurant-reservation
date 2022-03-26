@@ -38,7 +38,7 @@ function SeatReservation() {
 
   return (
     <fieldset className="card-main col-md-8 p-4 mb-3 text-center" >
-      <legend>Select Table</legend>
+      <h3>Select Table</h3>
       <h6 className="pb-2">table name - capacity</h6>
       <div>
         <select
