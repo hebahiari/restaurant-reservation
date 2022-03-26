@@ -64,6 +64,7 @@ html {
 
 .btn-success {
     background-color: #2aa198;
+    border: #2aa198;
 }
 
 .btn-primary {
@@ -92,6 +93,10 @@ html {
     padding: 0.375rem 2.25rem 0.375rem 0.75rem;
     color: #073642;
     background-color: #a9bdbd;
+}
+
+.white-text {
+    color: white;
 }
 
 @media all and (min-width: 950px) {

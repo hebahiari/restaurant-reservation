@@ -24,8 +24,8 @@ function Menu() {
 
 
   return (
-    <nav className="navbar navbar-expand-md shadow fixed-top navbar-dark ">
-      <a className="navbar-brand logo" href="/">
+    <nav className="navbar navbar-expand-md shadow fixed-top ">
+      <a className="navbar-brand logo white-text" href="/">
         Booked.
       </a>
       <button
@@ -40,7 +40,7 @@ function Menu() {
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav mx-auto">
           <li className="nav-item active">
-            <Link className="nav-link" to="/dashboard">
+            <Link className="nav-link  white-text" to="/dashboard">
               <span className="oi oi-home" />
               &nbsp;Home
             </Link>
@@ -52,7 +52,7 @@ function Menu() {
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="/tables/new">
+            <Link className="nav-link green-text" to="/tables/new">
               <span className="oi oi-plus" />
               &nbsp;New Table
             </Link>
