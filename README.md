@@ -45,19 +45,19 @@ Booked. is a restaurant reservation system desgined to be used by a restaurant m
 # Screenshots
 
 ## Dashboard
-![dashboard](/images/Dashboard.PNG)
+![dashboard](/screenshots/Dashboard.jpg)
 
 ## New Reservation
-![new-reservation](/images/NewReservation.PNG)
+![new-reservation](/screenshots/NewReservation.jpg)
 
 ## Search By Phone Number
-![search-phone](/images/SearchPhone.PNG)
+![search-phone](/screenshots/Search.jpg)
 
 ## New Table
-![new-table](/images/NewTable.PNG)
+![new-table](/screenshots/NewTable.jpg)
 
 ## Seat Reservation
-![seat-reservation](/images/SeatReservation.PNG)
+![seat-reservation](/screenshots/Seat.jpg)
 
 ## Documentation for API 
 | Route                                | Description                                        | Methods |
