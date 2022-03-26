@@ -47,8 +47,8 @@ function Search() {
 
   const noReservationsFound = (
     <div className="row  justify-content-center ">
-      <div className="card-main col-8 p-4 mb-3 justify-content-center center-text">
-        <p>No reservations found for this number: {number}</p>
+      <div className="card-main col-8 p-4 mb-3 justify-content-center text-center">
+      <p>No reservations found for this number: {number}</p>
       </div>
     </div>
   );

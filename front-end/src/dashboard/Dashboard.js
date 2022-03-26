@@ -75,7 +75,7 @@ function Dashboard({ date }) {
 
   return (
     <>
-      <div className="col-lg-7 col-md-7 col-xs-6 col-sm-12 align-self-start m-2 me-4 card-main">
+      <div className="col-lg-7 col-md-7 col-xs-6 col-sm-12 align-self-start m-3 me-5 pe-5 card-main">
         <div className="text-center">
           <div>
             <div className="row p-0 justify-content-center">
@@ -119,7 +119,7 @@ function Dashboard({ date }) {
             <div className="text-left">
               {loading ? loadingSpinner : null}
               <ListReservations reservations={reservations} />
-              {!reservations.length ? (
+              {(!reservations.length && !loading) ? (
                 <div className="container p-3 text-center">
                   <p>No reservations found for this date.</p>
                   {addReservationButton}
@@ -130,7 +130,7 @@ function Dashboard({ date }) {
           </div>
         </div>
       </div>
-      <div className="col-lg-3 col-md-4 col-xs-6 col-sm-12 align-self-start m-2 card-main">
+      <div className="col-lg-3 col-md-4 col-xs-6 col-sm-12 align-self-start m-3 card-main">
         <div className="text-center">
           <div className="row justify-content-center">
             <div className="col-auto p-1">
@@ -145,7 +145,7 @@ function Dashboard({ date }) {
           </div>
           {loading ? loadingSpinner : null}
           <ListTables tables={tables} />
-          {!tables.length ? (
+          {(!tables.length && !loading) ? (
             <div className="container p-3 text-center">
               <p>No Tables found</p>
               {addTableButton}

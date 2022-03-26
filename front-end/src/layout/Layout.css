@@ -69,6 +69,7 @@ html {
 
 .btn-primary {
     background-color: #b58900;
+    border: #b58900;
 }
 
 .form-control {
@@ -97,6 +98,12 @@ html {
 
 .white-text {
     color: white;
+}
+
+.alert-danger {
+    background-color: #d33682;
+    border: none;
+    color: #fff;
 }
 
 @media all and (min-width: 950px) {
