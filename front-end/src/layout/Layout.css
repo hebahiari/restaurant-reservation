@@ -21,9 +21,8 @@ body {
     text-shadow: 0 .5rem 1rem rgba(0, 0, 0, .40);
 }
 
-h2 {
-    /* margin-bottom: 10px; */
-    margin-top: 20px;
+.padded {
+    padding: 20px;
 }
 
 html {
@@ -48,7 +47,8 @@ html {
 }
 
 .nav-link {
-    color: #2aa198 !important
+    color: #2aa198 !important;
+    padding: 0;
 }
 
 .card-body {

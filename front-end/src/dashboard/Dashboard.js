@@ -75,7 +75,7 @@ function Dashboard({ date }) {
 
   return (
     <>
-      <div className="col-lg-7 col-md-7 col-sm-12 col-xs-6  align-self-start m-3 me-5 pe-5 card-main">
+      <div className="padded col-lg-7 col-md-5 col-sm-12 col-xs-6  align-self-start m-3 me-5 pe-5 card-main">
         <div className="text-center">
           <div>
             <div className="row p-0 justify-content-center">
@@ -130,7 +130,7 @@ function Dashboard({ date }) {
           </div>
         </div>
       </div>
-      <div className="col-lg-3 col-md-7 col-sm-12 col-xs-6 align-self-start m-3 card-main">
+      <div className="padded col-lg-3 col-md-5 col-sm-12 col-xs-6 align-self-start m-3 card-main">
         <div className="text-center">
           <div className="row justify-content-center">
             <div className="col-auto p-1">
