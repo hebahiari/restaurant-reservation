@@ -14,6 +14,7 @@ function TableForm({ handleChange, handleSubmit, newTable, history }) {
           required
           onChange={handleChange}
           value={newTable.first_name}
+          placeholder="Insert table name here"
         />
       </div>
 
