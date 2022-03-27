@@ -13,7 +13,7 @@ function Search() {
     loading: false,
   });
 
-  const {number, found, displayResult, searchError, loading} = stateForm;
+  const { number, found, displayResult, searchError, loading } = stateForm;
 
   let queryNumber = 0;
 
@@ -37,7 +37,7 @@ function Search() {
     setStateForm((currentState) => ({
       ...currentState,
       number: event.target.value,
-      displayResult: false
+      displayResult: false,
     }));
   };
 
@@ -48,16 +48,20 @@ function Search() {
       loading: true,
     }));
     search(phoneNumber, abortController.signal)
-      .then((response) => setStateForm((currentState) => ({
-        ...currentState,
-        found: response,
-        displayResult:true,
-        loading:false
-      })))
-      .catch((error) => setStateForm((currentState) => ({
-        ...currentState,
-        searchError: error,
-      })))
+      .then((response) =>
+        setStateForm((currentState) => ({
+          ...currentState,
+          found: response,
+          displayResult: true,
+          loading: false,
+        }))
+      )
+      .catch((error) =>
+        setStateForm((currentState) => ({
+          ...currentState,
+          searchError: error,
+        }))
+      );
     return () => abortController.abort();
   }
 
@@ -104,10 +108,11 @@ function Search() {
                   placeholder="Insert phone number"
                 />
               </div>
-
-              <button type="submit" className="btn btn-primary m-1">
-                Search
-              </button>
+              <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button type="submit" className="btn btn-primary m-1">
+                  Search
+                </button>
+              </div>
             </form>
             <ErrorAlert error={searchError} />
           </div>

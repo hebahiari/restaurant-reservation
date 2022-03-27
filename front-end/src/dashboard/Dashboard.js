@@ -36,7 +36,11 @@ function Dashboard({ date }) {
   // sending api calls to list the reservations and tables
   function loadDashboard() {
     const abortController = new AbortController();
-    setStateForm((currentStateForm) => ({ ...currentStateForm, reservationsError: null, loading: true }))
+    setStateForm((currentStateForm) => ({
+      ...currentStateForm,
+      reservationsError: null,
+      loading: true,
+    }));
     listReservations({ date }, abortController.signal)
       .then((reservationResponse) =>
         setStateForm((currentStateForm) => ({
@@ -46,13 +50,24 @@ function Dashboard({ date }) {
         }))
       )
       .catch((error) =>
-        setStateForm((currentStateForm)=>({ ...currentStateForm, reservationsError: error }))
+        setStateForm((currentStateForm) => ({
+          ...currentStateForm,
+          reservationsError: error,
+        }))
       )
       .then(() => listTables(abortController.signal))
       .then((tablesResponse) =>
-        setStateForm((currentStateForm)=>({ ...currentStateForm, tables: tablesResponse }))
+        setStateForm((currentStateForm) => ({
+          ...currentStateForm,
+          tables: tablesResponse,
+        }))
       )
-      .catch((error) => setStateForm((currentStateForm)=>({ ...currentStateForm, tablesError: error })));
+      .catch((error) =>
+        setStateForm((currentStateForm) => ({
+          ...currentStateForm,
+          tablesError: error,
+        }))
+      );
     return () => abortController.abort();
   }
 

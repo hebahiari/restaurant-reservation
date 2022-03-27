@@ -5,26 +5,25 @@ import ErrorAlert from "../layout/ErrorAlert";
 import ReservationCard from "./ReservationCard";
 
 function DisplayReservation() {
+  const { reservationId } = useParams();
+  const [reservation, setReservation] = useState(null);
+  const [getReservationError, setGetReservationError] = useState(null);
 
-const { reservationId } = useParams();
-const [ reservation, setReservation] = useState(null)
-const [ getReservationError, setGetReservationError ] = useState(null);
-
-//retrieving the reservation from the database
-useEffect(() => {
+  //retrieving the reservation from the database
+  useEffect(() => {
     const abortController = new AbortController();
     getReservation(reservationId, abortController.signal)
-        .then(setReservation)
-        .catch(setGetReservationError);
+      .then(setReservation)
+      .catch(setGetReservationError);
     return () => abortController.abort();
-}, [reservationId])
-    
+  }, [reservationId]);
+
   return (
-      <div>
-      {reservation ? <ReservationCard reservation={reservation} /> : null }
+    <div>
+      {reservation ? <ReservationCard reservation={reservation} /> : null}
       <ErrorAlert error={getReservationError} />
-</div>  
-);
+    </div>
+  );
 }
 
 export default DisplayReservation;

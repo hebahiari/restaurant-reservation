@@ -5,8 +5,8 @@ function ReservationForm({ handleChange, handleSubmit, reservation, history }) {
     <form onSubmit={handleSubmit}>
       <div className="mb-3">
         <label htmlFor="first_name" className="form-label">
-          First Name
-        </label>
+          First Name{" "}
+        </label>{" "}
         <input
           className="form-control"
           id="first_name"
@@ -17,11 +17,10 @@ function ReservationForm({ handleChange, handleSubmit, reservation, history }) {
           placeholder="Insert first name here"
         />
       </div>
-
       <div className="mb-3">
         <label htmlFor="last_name" className="form-label">
-          Last Name
-        </label>
+          Last Name{" "}
+        </label>{" "}
         <input
           className="form-control"
           id="last_name"
@@ -32,11 +31,10 @@ function ReservationForm({ handleChange, handleSubmit, reservation, history }) {
           placeholder="Insert last name here"
         />
       </div>
-
       <div className="mb-3">
         <label htmlFor="mobile_number" className="form-label">
-          Mobile number
-        </label>
+          Mobile number{" "}
+        </label>{" "}
         <input
           type="tel"
           //  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
@@ -49,11 +47,10 @@ function ReservationForm({ handleChange, handleSubmit, reservation, history }) {
           placeholder="ex: 000-000-0000"
         />
       </div>
-
       <div className="mb-3">
         <label htmlFor="reservation_date" className="form-label">
-          Reservation date
-        </label>
+          Reservation date{" "}
+        </label>{" "}
         <input
           className="form-control"
           type="date"
@@ -67,11 +64,10 @@ function ReservationForm({ handleChange, handleSubmit, reservation, history }) {
           pattern="\d{4}-\d{2}-\d{2}"
         />
       </div>
-
       <div className="mb-3">
         <label htmlFor="reservation_time" className="form-label">
-          Reservation time
-        </label>
+          Reservation time{" "}
+        </label>{" "}
         <input
           type="time"
           // min="10:30"
@@ -86,11 +82,10 @@ function ReservationForm({ handleChange, handleSubmit, reservation, history }) {
           pattern="[0-9]{2}:[0-9]{2}"
         />
       </div>
-
       <div className="mb-3">
         <label htmlFor="people" className="form-label">
-          Number of people
-        </label>
+          Number of people{" "}
+        </label>{" "}
         <input
           type="number"
           className="form-control"
@@ -99,20 +94,26 @@ function ReservationForm({ handleChange, handleSubmit, reservation, history }) {
           required
           onChange={handleChange}
           value={reservation.people}
-        />
-      </div>
+        />{" "}
+      </div>{" "}
       <div className="row justify-content-end">
         <div className="col col-auto align-self-end">
-      <button type="submit" className="btn btn-primary m-1" onClick={handleSubmit}>
-        Submit
-      </button>
-      <button className="btn btn-secondary m-1" onClick={() => history.go(-1)}>
-        Cancel
-      </button>
-      </div>
-      </div>
+          <button
+            type="submit"
+            className="btn btn-primary m-1"
+            onClick={handleSubmit}
+          >
+            Submit{" "}
+          </button>{" "}
+          <button
+            className="btn btn-secondary m-1"
+            onClick={() => history.go(-1)}
+          >
+            Cancel{" "}
+          </button>{" "}
+        </div>{" "}
+      </div>{" "}
     </form>
-
   );
 }
 

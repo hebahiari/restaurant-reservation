@@ -7,7 +7,6 @@ import { Link, useHistory } from "react-router-dom";
  */
 
 function Menu() {
-
   const history = useHistory();
   let [number, setNumber] = useState("");
 
@@ -17,16 +16,15 @@ function Menu() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if(number) {
-    history.push(`search?mobile_number=${number}`)
-  }
+    if (number) {
+      history.push(`search?mobile_number=${number}`);
+    }
   };
-
 
   return (
     <nav className="navbar navbar-dark main-navbar navbar-expand-md shadow fixed-top ">
       <a className="navbar-brand logo white-text" href="/">
-       <b>Booked.</b> 
+        <b>Booked.</b>
       </a>
       <button
         className="navbar-toggler"

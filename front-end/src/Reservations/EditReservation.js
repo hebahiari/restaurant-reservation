@@ -48,7 +48,9 @@ function EditReservation() {
     event.preventDefault();
     updateReservation(reservationId, reservation)
       // .then(() => history.push(`/reservations/${reservationId}`))
-      .then(() => history.push(`/dashboard?date=${reservation.reservation_date}`))
+      .then(() =>
+        history.push(`/dashboard?date=${reservation.reservation_date}`)
+      )
       .catch(setUpdateError);
   };
 

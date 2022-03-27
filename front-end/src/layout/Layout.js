@@ -22,14 +22,13 @@ function Layout() {
       <div className="container">
         <div className="row-12">
           <div className="center-text" onClick={() => history.push("/")}>
-          <h1 className="text-center header-logo">Booked.</h1>
-          {/* <h6 text-center>the ultimate restaurant reservation system</h6> */}
+            <h1 className="text-center header-logo">Booked.</h1>
           </div>
           <div className="row gx-5 justify-content-center align-items-start p-4">
             <Routes />
           </div>
         </div>
-      </div>          
+      </div>
       <h6 className="invisible">Periodic Tables</h6>
     </div>
   );

@@ -32,7 +32,10 @@ function SeatReservation() {
 
   // controlling the component
   const handleTableChange = (event) => {
-    setStateForm((currenState) => ({ ...currenState, selectedTableId: event.target.value }))
+    setStateForm((currenState) => ({
+      ...currenState,
+      selectedTableId: event.target.value,
+    }));
   };
 
   // sending an api call to add the reservation id to the selected table
@@ -46,7 +49,7 @@ function SeatReservation() {
   };
 
   return (
-    <fieldset className="card-main col-md-8 p-4 mb-3 text-center">
+    <fieldset className="card-main col-md-8 p-4 mb-3">
       <h3>Select Table</h3>
       <h6 className="pb-2">table name - capacity</h6>
       <div>
@@ -67,13 +70,15 @@ function SeatReservation() {
           ))}
         </select>
         <br />
-        <button
-          type="submit"
-          className="btn btn-success m-1"
-          onClick={handleConfirmButton}
-        >
-          Confirm
-        </button>
+        <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+          <button
+            type="submit"
+            className="btn btn-success m-1"
+            onClick={handleConfirmButton}
+          >
+            Confirm
+          </button>
+        </div>
         <ErrorAlert error={tablesError} />
       </div>
     </fieldset>

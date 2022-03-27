@@ -69,12 +69,12 @@ function ReservationCard({ reservation }) {
       <h5 className="card-header "> Reservation ID: {reservation_id} </h5>
       <div className="card-body p-4 ">
         <p className="card-text">
-        Name:  {first_name} {last_name}
+          Name: {first_name} {last_name}
         </p>
         <p className="card-text">People: {people} </p>
         <p className="card-text">Mobile number: {mobile_number} </p>
         <p className="card-text">
-        Date/Time: {reservation_date.slice(0, 10)} /
+          Date/Time: {reservation_date.slice(0, 10)} /
           {reservation_time.slice(0, 5)}
         </p>
         <p
@@ -84,17 +84,17 @@ function ReservationCard({ reservation }) {
           Status: {status}
         </p>
       </div>
-      {status === "booked" ? (<div className=" dark-bg container px-1 pb-3 pe-3">
+      {status === "booked" ? (
+        <div className=" dark-bg container px-1 pb-3 pe-3">
           <div className="row dark-bg pt-3 mx-2 justify-content-between">
-            <div className="col p-0">
-              {cancelButton}
-            </div>
+            <div className="col p-0">{cancelButton}</div>
             <div className="col-auto p-0">
               {editButton}
               {seatButton}
             </div>
           </div>
-        </div>) : null }
+        </div>
+      ) : null}
     </div>
   );
 }

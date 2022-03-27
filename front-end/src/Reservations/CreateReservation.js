@@ -5,7 +5,6 @@ import ReservationForm from "./ReservationForm";
 import ErrorAlert from "../layout/ErrorAlert";
 
 function CreateReservation() {
-
   //reservation template
   const emptyReservation = {
     first_name: "",
@@ -24,7 +23,10 @@ function CreateReservation() {
   const handleChange = (event) => {
     setReservation({
       ...reservation,
-      [event.target.name]: event.target.type === "number" ? parseInt(event.target.value) : event.target.value
+      [event.target.name]:
+        event.target.type === "number"
+          ? parseInt(event.target.value)
+          : event.target.value,
     });
   };
 
@@ -34,8 +36,7 @@ function CreateReservation() {
     createNewReservation(reservation);
   };
 
-
-  //sending the api call and clearing the form 
+  //sending the api call and clearing the form
   function createNewReservation(reservation) {
     const abortController = new AbortController();
     setNewReservationsError(null);
@@ -49,7 +50,7 @@ function CreateReservation() {
   }
 
   return (
-    <div className="card-main col-md-8 p-4" >
+    <div className="card-main col-md-8 p-4">
       <h1>Create New Reservation</h1>
       <ReservationForm
         handleSubmit={handleSubmit}
