@@ -1,6 +1,8 @@
 ## Links
 * Deployed App: [Booked. website](https://restaurant-reservations-sys.herokuapp.com/)
 
+![dashboard](/screenshots/Dashboard.JPG)
+
 ## Summary
 Booked. is a restaurant reservation system desgined to be used by a restaurant manager/owner. The application allows the user to control all aspects of reservations and tables within the restaurant. This allows the user to have a clear view of the current status of the restaurant and quickly manage reservations as needed.
  * Reservations
