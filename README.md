@@ -29,9 +29,6 @@ Booked. is a restaurant reservation system desgined to be used by a restaurant m
 1. Go to the project root
 2. Run `npm install` to install dependencies
 3. Start project on development server with `npm run start:dev`
-4. Start tests with `npm run test`
-5. Start frontend/backend tests with `npm run test:frontend or npm run test:backend`
-6. Start individual tests for each user stories with `npm run test:1:frontend` replace 1 with the desired user story or replace frontend with backend
 
 ## Technology
 ### <u>Client</u>
