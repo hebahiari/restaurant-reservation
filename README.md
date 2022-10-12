@@ -1,29 +1,10 @@
 ## Links
-* Deployed App: [Booked. website](https://restaurant-reservations-sys.herokuapp.com/)
+* Deployed App: [Petsgram website](https://main.diaw7mtof8uhl.amplifyapp.com/)
 
-![dashboard](/screenshots/Dashboard.JPG)
+![homepage](/screenshots/homepage.JPG)
 
 ## Summary
-Booked. is a restaurant reservation system desgined to be used by a restaurant manager/owner. The application allows the user to control all aspects of reservations and tables within the restaurant. This allows the user to have a clear view of the current status of the restaurant and quickly manage reservations as needed.
- * Reservations
-    * View all reservations for a specified date
-    * Create new Reservations
-    * Cancel existing Reservations
-    * Search for a reservation via the customer's phone number
-    * Edit/update existing reservation details and status 
-    * Seat a reservation at a table
-* Tables
-    * View all tables and whether they are occupied or open
-    * Create new tables
-    * Clear tables (When a reservation is finished and the table is ready for the next guest)
-        * Changes an occupied table's status from "Occupied" to "Free"
-* Built-in validation
-    * Application ensures reservations can only be created/updated within a valid date/time-window
-        * Cannot create reservations for past dates, reservations can only be created between 9:30 am and 10:30 pm
-        * Reservations cannot be created for Tuesdays (Restaurant closed)
-        * Validates all inputs for proper formatting
-    * When the user attempts to seat a reservation at a table, the application will make sure that the selected table has proper capacity for the reservation
-    * Unoccupied tables cannot be cleared
+//TODO
 
 ## Installation
 1. Go to the project root
@@ -34,69 +15,96 @@ Booked. is a restaurant reservation system desgined to be used by a restaurant m
 ### <u>Client</u>
 * Built with create-react-app.
 * Uses [react-router](https://reactrouter.com/) for front-end routing
-* Styled with [Bootstrap](https://getbootstrap.com/)
 ### <u>Server</u>
 * Node and Express
-* Utilizes [Knex](https://knexjs.org/) for PostgreSQL query building
 ### <u>Database</u>
-* Hosted by ElphantSQL
+* Hosted by MongoDB
+* Files uploaded to AWS S3 Bucket
 
 # Screenshots
 
-## Dashboard
-![dashboard](/screenshots/Dashboard.JPG)
+## Welcome
+![welcome](/screenshots/welcome.JPG)
 
-## New Reservation
-![new-reservation](/screenshots/NewReservation.JPG)
+## Home Screen
+![homescreen](/screenshots/home-screen.JPG)
 
-## Search By Phone Number
-![search-phone](/screenshots/Search.JPG)
+## Register
+![register](/screenshots/register.JPG)
 
-## New Table
-![new-table](/screenshots/NewTable.JPG)
+## Profile
+![profile](/screenshots/profile.JPG)
 
-## Seat Reservation
-![seat-reservation](/screenshots/Seat.JPG)
+## Search
+![search](/screenshots/search.JPG)
+
 
 ## Documentation for API 
 | Route                                | Description                                        | Methods |
 | ------------------------------------ | -------------------------------------------------- | ------- |
-| /reservations	                       | returns a list of reservations for current date    | GET     | 
-| /reservations                        | creates a new reservation                          | POST    |  
-| /reservations?date=YYYY-MM-DD        | returns a list of reservations for a given date    | GET     |
-| /reservations/:reservation_id	       | returns a reservation matching a given id          | GET     |
-| /reservations/:reservation_id	       | updates a reservation matching a given id          | PUT     |
-| /reservations/:reservation_id/status | updates the status of a reservation for a given id | PUT     |
-| /tables	                           | returns a list of tables                           | GET     |
-| /tables	                           | creates a new table                                | POST    |
-| /tables/:table_id/seat	           | moves reservation to a table for a given id        | PUT     |
-| /tables/:table_id/seat	           | remove a reservation from a table for a given id   | DELETE  |
+
+| /users?userId=id                     | returns a user's details                           | GET     | 
+| /users?username=username             | returns a user's details                           | GET     |  
+| /users/followers/:userId             | returns a list of followers for a specific user    | GET     |
+| /users/:userId/follow	               | updates the followed user's followers list         | PUT     |
+| /users/search/:username	            | returns a list of matching usernames               | GET     |
+| /users/:userId/img                   | updates the profile photo of the current user      | PUT     |
+| /users/following/:userId	            | returns a list of followed users                   | GET     |
+
+| /posts/timeline/all	               | returns a list of all posts                        | GET     |
+| /posts/timeline/:id	               | returns a list of followed users's posts           | GET     |
+| /posts/profile/:username	            | remove a list of posts of the specified user       | GET     |
+| /posts/:postId/like	               | updates the list of likes of the specified post    | PUT     |
+| /posts	                              | creates a new post                                 | POST    |
+| /posts/:postId/:userId	            | deletes a post                                     | DELETE  |
+
+| /auth/login           	            | verifies user credintials                          | POST    |
+| /auth/register                       | registers a user                                   | POST    |
+
+| /comments                 	         | creates a new comment                              | POST    |
+| /comments/:postId	                  | returns a list of comments for the specified post  | GET     |
+
+| /upload	                           | uploads a file to the s3 bucket                    | POST    |
 
 
-## Reservation Example
+## User Example
 ```
 {
     data: {
-        reservation_id: 5,
-        first_name: "Angelina",
-        last_name: "Jolie",
-        mobile_number: "650-646-8897",
-        reservation_date: "2026-12-30",
-        reservation_time: "18:00:00",
-        people: 2,
-        status: "booked",
-        created_at: "2020-12-10T08:31:32.326Z",
-        updated_at: "2020-12-10T08:31:32.326Z"
+{
+    "_id": "6346056f003f46fccb36ad4d",
+    "username": "the-heba",
+    "email": "heba@gmail.com",
+    "followers": [
+        "63460545003f46fccb36ad45"
+    ],
+    "following": [
+        "634604cc003f46fccb36ad38",
+        "63460545003f46fccb36ad45"
+    ],
+    "isAdmin": false,
+    "pets": [],
+    "profilePicture": "https://petsgram-app.s3.us-west-1.amazonaws.com/m9eXLgnY6-45672425.jpg",
+    "coverPhoto": "https://img.freepik.com/free-vector/animal-background-vector-with-cute-pets-illustration_53876-127698.jpg?w=2000",
+    "notifications": [],
+    "createdAt": "2022-10-12T00:08:15.666Z",
+    "__v": 0
+}
     }
 }
 ```
 
-## Table Example
+## Post Example
 ```
 {
-    table_id: 3,
-    table_name: "#1",
-    capacity: 6,
-    reservation_id: 11
+    "_id": "634604f0003f46fccb36ad3c",
+    "userId": "634604cc003f46fccb36ad38",
+    "desc": "isnt he the cutest?",
+    "img": "https://petsgram-app.s3.us-west-1.amazonaws.com/Oqeq1cK96-2a633716cabd5c9613a4e89946c67e7a.jpg",
+    "likes": [],
+    "comments": 0,
+    "createdAt": "2022-10-12T00:06:08.216Z",
+    "updatedAt": "2022-10-12T00:06:08.216Z",
+    "__v": 0
 }
 ```
