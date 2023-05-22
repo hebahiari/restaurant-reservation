@@ -1,5 +1,5 @@
 ## Links
-* Deployed App: [Booked. website](https://restaurant-reservations-sys.herokuapp.com/)
+* Deployed App: [Booked. website](https://booked.hebahiari.com/)
 
 ![dashboard](/screenshots/Dashboard.JPG)
 
